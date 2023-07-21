@@ -1,0 +1,10 @@
+\ Model bilinear_copy
+\ LP format - for model browsing. Use MPS format to capture full model detail.
+Minimize
+ 
+Subject To
+ R1: t_ht23 = 0
+ R629: t_ht23 >= 4
+Bounds
+ t_ht23 free
+End
