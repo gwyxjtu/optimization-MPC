@@ -80,7 +80,7 @@ def OptimizationDay(parameter_json,load_json,begin_time,time_scale,storage_begin
     # 初始化设备效率参数
     try:
         k_fc_p = parameter_json['device']['fc']['eta_fc_p']
-        k_fc_g = parameter_json['device']['fc']['eta_ex_g']
+        k_fc_g = parameter_json['device']['fc']['eta_fc_g']
         k_el = parameter_json['device']['el']['beta_el']
         k_eb = parameter_json['device']['eb']['beta_eb']
         k_pv = parameter_json['device']['pv']['beta_pv']
