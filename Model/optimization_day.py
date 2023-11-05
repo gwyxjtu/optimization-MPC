@@ -86,7 +86,7 @@ def OptimizationDay(parameter_json,load_json,begin_time,time_scale,storage_begin
         k_pv = parameter_json['device']['pv']['beta_pv']
         k_hp_q = parameter_json['device']['hp']['beta_hpq']
         k_hp_g = parameter_json['device']['hp']['beta_hpg']
-        k_pump = parameter_json['device']['pump']['beta_p']
+        # k_pump = parameter_json['device']['pump']['beta_p']
 
         ht_loss = parameter_json['device']['ht']['miu_loss']
         ct_loss = parameter_json['device']['ct']['miu_loss']
@@ -288,41 +288,26 @@ def OptimizationDay(parameter_json,load_json,begin_time,time_scale,storage_begin
 
     # 计算一些参数
     opex_without_opt = [lambda_ele_in[i]*(p_load[i]+q_load[i]/k_hp_q+g_load[i]/k_eb) for i in range(period)]
-    # dict_control = {# 负荷
-    #     'time':begin_time,
-    #     # thermal binary
-    #     'b_hp':[1 if p_hp[i].x > 0 else 0 for i in range(period)],
-    #     'b_eb':[1 if p_eb[i].x > 0 else 0 for i in range(period)],
-    #     # -1代表储能，1代表供能
-    #     'b_ht':[-1 if t_ht[i].x > t_ht_l[i].x else 1 if t_ht[i].x > t_ht_l[i].x else 0  for i in range(period)],
-    #     'b_ct':[1 if t_ct[i].x > t_ct_l[i].x else -1 if t_ct[i].x > t_ht_l[i].x else 0  for i in range(period)],
-    #     'b_fc':[1 if p_fc[i].x > 0 else 0 for i in range(period)],
-
-    #     # ele
-    #     'p_hp':[p_hp[i].x for i in range(period)],
-    #     'p_eb':[p_eb[i].x for i in range(period)],
-    #     'p_pump':[p_pump[i].x for i in range(period)],#水泵
-    #     'p_fc':[p_fc[i].x for i in range(period)],
-    #     'p_el':[p_el[i].x for i in range(period)],
-
-    #     # hydrogen
-    #     'h_hst':[h_sto[i].x for i in range(period)],
-    #     'hydrogen_bottle':[hydrogen_bottle_max_start-sum([h_pur[j].x for j in range(i)]) for i in range(period)],
-
-
-    #     # thermal continuous
-    #     't_ht':[t_ht[i].x for i in range(period)],
-    #     't_ct':[t_ct[i].x for i in range(period)],
-    #     't_mp':[0 for _ in range(period)],# main pipe temperature
-    #     'm_mp':[0 for _ in range(period)],# main pipe mass flow
-    #     'g_eb':[g_eb[i].x for i in range(period)],
-
-    # }
     dict_control = {# 负荷
-        'time':[begin_time+i for i in range(period)],
-        # 运行工况输出
-        'status':[15 for i in range(period)], #设备运行别问，问就是全开
+        'time':begin_time,
+        # thermal binary
+        'b_hp':[1 if p_hp[i].x > 0 else 0 for i in range(period)],
+        'b_eb':[1 if p_eb[i].x > 0 else 0 for i in range(period)],
+        # -1代表储能，1代表供能
+        'b_ht':[-1 if t_ht[i].x > t_ht_l[i].x else 1 if t_ht[i].x > t_ht_l[i].x else 0  for i in range(period)],
+        'b_ct':[1 if t_ct[i].x > t_ct_l[i].x else -1 if t_ct[i].x > t_ht_l[i].x else 0  for i in range(period)],
+        'b_fc':[1 if p_fc[i].x > 0 else 0 for i in range(period)],
+
+        # ele
+        'p_eb':[p_eb[i].x for i in range(period)],
+        'p_fc':[p_fc[i].x for i in range(period)],
+        'p_el':[p_el[i].x for i in range(period)],
     }
+    # dict_control = {# 负荷
+    #     'time':[begin_time+i for i in range(period)],
+    #     # 运行工况输出
+    #     'status':[15 for i in range(period)], #设备运行别问，问就是全开
+    # }
     # dict_plot = {
     #     # operational day cost
     #     'opex_without_system':sum(opex_without_opt),#没有能源站的运行成本，负荷直接加

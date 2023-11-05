@@ -63,34 +63,6 @@
                 "beta_ec":0.9,
                 "comment":"electric chiller"
             },
-
-
-        "ghp":
-            {
-                "power_max":500,
-
-                "beta_ghpg":3.54,
-                "beta_ghpq":4,
-                "comment":"ground source heat pump"
-            },
-        "hp":
-            {
-                "power_max":500,
-
-                "beta_ghpg":3.54,
-                "beta_ghpq":4,
-                "comment":"ground source heat pump,季节储热只能用cop了"
-            },
-
-        "gtw":
-            {
-                "number_max":42,
-                "cost":30000,
-                "crf":30,
-
-                "beta_gtw":7,
-                "comment":"ground thermal well"
-            },
         "ht":
             {
                 "water_max":100000,
@@ -106,6 +78,33 @@
             },
 
 
+
+        "ghp":
+            {
+                "power_max":500,
+
+                "beta_ghpg":3.54,
+                "beta_ghpq":4,
+                "comment":"ground source heat pump"
+            },
+        "hp":
+            {
+                "power_max":500,
+
+                "beta_hpg":3.54,
+                "beta_hpq":4,
+                "comment":"ground source heat pump,季节储热只能用cop了"
+            },
+
+        "gtw":
+            {
+                "number_max":42,
+                "cost":30000,
+                "crf":30,
+
+                "beta_gtw":7,
+                "comment":"ground thermal well"
+            },
         "ct":
             {
                 "water_max":100000,
@@ -117,25 +116,15 @@
                 "end_slack":0.2,
                 "comment":"cooling water tank"
             },
-        "xb":
-            {
-                "s_max":1000,
-                "g_max":100
-            },
+
 
         "pv":
             {
-                "area_max":10000
-            },
-        "wd":
-            {
-                "power_max":10000
-            },
-        "bs":
-            {
-                "sto_max":10000,
-                "power_max":1000
+                "area_max":10000,
+
+                "beta_pv":0.21
             }
+
 
     }
 }

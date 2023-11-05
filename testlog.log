@@ -1,0 +1,150 @@
+
+Gurobi 9.1.0 (win64) logging started Fri Sep  8 14:35:16 2023
+
+Changed value of parameter LogFile to testlog.log
+   Prev:   Default: 
+Gurobi Optimizer version 9.1.0 build v9.1.0rc0 (win64)
+Thread count: 8 physical cores, 16 logical processors, using up to 16 threads
+Optimize a model with 649 rows, 504 columns and 1317 nonzeros
+Model fingerprint: 0xcefcfe4f
+Coefficient statistics:
+  Matrix range     [2e-02, 2e+02]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [4e+00, 1e+03]
+Presolve removed 600 rows and 387 columns
+Presolve time: 0.01s
+Presolved: 49 rows, 117 columns, 233 nonzeros
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    0.0000000e+00   5.388333e+02   0.000000e+00      0s
+      20    0.0000000e+00   0.000000e+00   0.000000e+00      0s
+
+Solved in 20 iterations and 0.01 seconds
+Optimal objective  0.000000000e+00
+
+Gurobi 9.1.0 (win64) logging started Fri Sep  8 16:06:32 2023
+
+Changed value of parameter LogFile to testlog.log
+   Prev:   Default: 
+Gurobi Optimizer version 9.1.0 build v9.1.0rc0 (win64)
+Thread count: 8 physical cores, 16 logical processors, using up to 16 threads
+Optimize a model with 649 rows, 504 columns and 1317 nonzeros
+Model fingerprint: 0xcefcfe4f
+Coefficient statistics:
+  Matrix range     [2e-02, 2e+02]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [4e+00, 1e+03]
+Presolve removed 600 rows and 387 columns
+Presolve time: 0.01s
+Presolved: 49 rows, 117 columns, 233 nonzeros
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    0.0000000e+00   5.388333e+02   0.000000e+00      0s
+      20    0.0000000e+00   0.000000e+00   0.000000e+00      0s
+
+Solved in 20 iterations and 0.01 seconds
+Optimal objective  0.000000000e+00
+
+Gurobi 9.1.0 (win64) logging started Fri Sep  8 16:06:46 2023
+
+Changed value of parameter LogFile to testlog.log
+   Prev:   Default: 
+Gurobi Optimizer version 9.1.0 build v9.1.0rc0 (win64)
+Thread count: 8 physical cores, 16 logical processors, using up to 16 threads
+Optimize a model with 649 rows, 504 columns and 1317 nonzeros
+Model fingerprint: 0xcefcfe4f
+Coefficient statistics:
+  Matrix range     [2e-02, 2e+02]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [4e+00, 1e+03]
+Presolve removed 600 rows and 387 columns
+Presolve time: 0.01s
+Presolved: 49 rows, 117 columns, 233 nonzeros
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    0.0000000e+00   5.388333e+02   0.000000e+00      0s
+      20    0.0000000e+00   0.000000e+00   0.000000e+00      0s
+
+Solved in 20 iterations and 0.01 seconds
+Optimal objective  0.000000000e+00
+
+Gurobi 10.0.0 (mac64[arm]) logging started Tue Oct 17 15:15:56 2023
+
+Set parameter LogFile to value "testlog.log"
+Gurobi Optimizer version 10.0.0 build v10.0.0rc2 (mac64[arm])
+
+CPU model: Apple M1 Pro
+Thread count: 8 physical cores, 8 logical processors, using up to 8 threads
+
+Optimize a model with 82 rows, 63 columns and 162 nonzeros
+Model fingerprint: 0x3f07f217
+Coefficient statistics:
+  Matrix range     [2e-02, 2e+02]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [4e+00, 1e+03]
+Presolve removed 76 rows and 52 columns
+Presolve time: 0.00s
+Presolved: 6 rows, 11 columns, 21 nonzeros
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    0.0000000e+00   1.487500e+01   0.000000e+00      0s
+       2    0.0000000e+00   0.000000e+00   0.000000e+00      0s
+
+Solved in 2 iterations and 0.00 seconds (0.00 work units)
+Optimal objective  0.000000000e+00
+
+Gurobi 10.0.3 (win64) logging started Wed Oct 25 18:36:36 2023
+
+Set parameter LogFile to value "testlog.log"
+Gurobi Optimizer version 10.0.3 build v10.0.3rc0 (win64)
+
+CPU model: Intel(R) Core(TM) i7-10700 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2]
+Thread count: 8 physical cores, 16 logical processors, using up to 16 threads
+
+Optimize a model with 649 rows, 504 columns and 1317 nonzeros
+Model fingerprint: 0xcefcfe4f
+Coefficient statistics:
+  Matrix range     [2e-02, 2e+02]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [4e+00, 1e+03]
+Presolve removed 600 rows and 387 columns
+Presolve time: 0.00s
+Presolved: 49 rows, 117 columns, 233 nonzeros
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    0.0000000e+00   5.388333e+02   0.000000e+00      0s
+      20    0.0000000e+00   0.000000e+00   0.000000e+00      0s
+
+Solved in 20 iterations and 0.01 seconds (0.00 work units)
+Optimal objective  0.000000000e+00
+
+Gurobi 10.0.3 (win64) logging started Wed Oct 25 18:37:22 2023
+
+Set parameter LogFile to value "testlog.log"
+Gurobi Optimizer version 10.0.3 build v10.0.3rc0 (win64)
+
+CPU model: Intel(R) Core(TM) i7-10700 CPU @ 2.90GHz, instruction set [SSE2|AVX|AVX2]
+Thread count: 8 physical cores, 16 logical processors, using up to 16 threads
+
+Optimize a model with 649 rows, 504 columns and 1317 nonzeros
+Model fingerprint: 0xcefcfe4f
+Coefficient statistics:
+  Matrix range     [2e-02, 2e+02]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [4e+00, 1e+03]
+Presolve removed 600 rows and 387 columns
+Presolve time: 0.00s
+Presolved: 49 rows, 117 columns, 233 nonzeros
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    0.0000000e+00   5.388333e+02   0.000000e+00      0s
+      20    0.0000000e+00   0.000000e+00   0.000000e+00      0s
+
+Solved in 20 iterations and 0.01 seconds (0.00 work units)
+Optimal objective  0.000000000e+00

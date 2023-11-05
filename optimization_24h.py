@@ -1,9 +1,9 @@
 '''
 Author: gwyxjtu
 Date: 2022-06-06 20:10:39
-LastEditors: guo_MacBookPro 867718012@qq.com
-LastEditTime: 2022-12-08 15:24:40
-FilePath: /optimization/optimization_24h.py
+LastEditors: guo_win 867718012@qq.com
+LastEditTime: 2023-09-08 14:32:34
+FilePath: \optimization\optimization_24h.py
 Description: 人一生会遇到约2920万人,两个人相爱的概率是0.000049,所以你不爱我,我不怪你.
 
 Copyright (c) 2022 by gwyxjtu 867718012@qq.com, All Rights Reserved. 
@@ -54,7 +54,7 @@ from Model.optimization_day import OptimizationDay,to_csv
 if __name__ == '__main__':
     _logging.info('start')
     try:
-        with open("Config/config.json", "r") as f:
+        with open("Config/config.json", "rb") as f:
             input_json = json.load(f)
     except BaseException as E:
         _logging.error('读取config失败,错误原因为{}'.format(E))
