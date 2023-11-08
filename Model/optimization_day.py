@@ -299,9 +299,9 @@ def OptimizationDay(parameter_json,load_json,begin_time,time_scale,storage_begin
         m.addConstr(g_hp[i] == cop_hp[i] * p_hp[i])
         m.addConstr(cop_hp[i]==4.8781+0.1209*t_gtw_out[i])
         m.addConstr(g_gtw[i]==g_hp[i]-p_hp[i])
-        m.addConstr(g_gtw[i]==c*m_gtw(t_gtw_out[i]-t_gtw_in[i]))
+        m.addConstr(g_gtw[i]==c*m_gtw*(t_gtw_out[i]-t_gtw_in[i]))
         m.addConstr(t_gtw_out[i]==k_gtw_fluid*(t_gtw_out[i]-t_b[i])+t_b[i])
-        m.addConstr(t_b[i]==10-(1000/(2*np.pi*2.07*200*192))*sum((g_gtw[j]-g_gtw_l[j])*g_func[i-j] for j in range(len(i+1))))
+        m.addConstr(t_b[i]==10-(1000/(2*np.pi*2.07*200*192))*gp.quicksum((g_gtw[j]-g_gtw_l[j])*g_func[i-j] for j in range(len(i+1))))
 
 
 
