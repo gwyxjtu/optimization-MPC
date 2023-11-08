@@ -266,7 +266,7 @@ def OptimizationDay(parameter_json,load_json,begin_time,time_scale,storage_begin
         m.addConstr(z_a[i]+z_b[i]+z_c[i]+z_d[i]+z_e[i]<=1)
 
         #给末端供热的约束
-        m.addConstr(c*m_de*(t_de[i]-t_de_l[i]) == g_ht[i]+g_eb[i]+g_fc[i]+g_hp[i]-g_load[i]-de_loss(t_de_l[i]-t_tem[i]))
+        m.addConstr(c*m_de*(t_de[i]-t_de_l[i]) == g_ht[i]+g_eb[i]+g_fc[i]+g_hp[i]-g_load[i]-de_loss*(t_de_l[i]-t_tem[i]))
 
 
 
