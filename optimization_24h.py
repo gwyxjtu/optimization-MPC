@@ -62,17 +62,17 @@ if __name__ == '__main__':
         raise Exception
     # 读取输入excel
     try:
-        load = pd.read_excel('Input/input_720h.xls')
+        load = pd.read_excel('input720/input_720h.xls')
     except BaseException as E:
         _logging.error('读取input_720h的excel失败,错误原因为{}'.format(E))
         raise Exception
     try:
-        sto = pd.read_excel('Input/input_now.xls')
+        sto = pd.read_excel('input720/input_now.xls')
     except BaseException as E:
         _logging.error('读取input_now的excel失败,错误原因为{}'.format(E))
         raise Exception
     try:
-        sto_end = pd.read_excel('Input/input_end.xls')
+        sto_end = pd.read_excel('input720/input_end.xls')
 
     except BaseException as E:
         _logging.error('读取input_end的excel失败,错误原因为{}'.format(E))
@@ -90,7 +90,7 @@ if __name__ == '__main__':
     
     # 写入输出Excel
     try:
-        to_csv(dict_control,"dict_opt_control_24h")
+        to_csv(dict_control,"input720/dict_opt_control_720h")
         # to_csv(dict_plot,"dict_opt_plot_24h")
     except BaseException as E:
         _logging.error('excel输出失败,错误原因为{}'.format(E))

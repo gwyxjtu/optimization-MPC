@@ -27,7 +27,7 @@
 
                 "eta_fc_p":13.2,
                 "eta_fc_g":19.8,
-                "theta_ex":0.92,
+                "theta_ex":0.85,
                 "comment":"fuel cell"
             },
         "el":
@@ -55,7 +55,7 @@
             },   
         "eb":
             {
-                "power_max":1200,
+                "power_max":2800,
                 "beta_eb":0.9,
                 "comment":"electric boiler"
             },  
@@ -74,7 +74,7 @@
                 "t_min":45,
                 "t_wetbulb":20,
                 "t_supply":55,
-                "miu_loss":0.02,
+                "miu_loss":0.001,
                 "end_slack":0.2,
                 "comment":"water tank"
             },
@@ -83,7 +83,7 @@
 
         "ghp":
             {
-                "power_max":500,
+                "power_max":300,
 
                 "beta_ghpg":3.54,
                 "beta_ghpq":4,
@@ -104,6 +104,7 @@
                 "cost":30000,
                 "crf":30,
                 "water_max":240000,
+                "t_in_min":4,
                 "beta_gtw":7,
                 "comment":"ground thermal well"
             },
@@ -129,9 +130,9 @@
         "de":
             {
                 "water_max":100000,
-                "t_max":15,
-                "t_min":4,
-                "miu_loss":0.05,
+                "t_max":55,
+                "t_min":45,
+                "miu_loss":0.002,
                 "temperature_difference":5,
                 "comment":"供暖管道"
             }
