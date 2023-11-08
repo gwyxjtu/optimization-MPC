@@ -53,6 +53,7 @@ from Model.optimization_day import OptimizationDay,to_csv
 
 if __name__ == '__main__':
     _logging.info('start')
+    time_length=24*30
     try:
         with open("Config/config.json", "rb") as f:
             input_json = json.load(f)
@@ -61,22 +62,26 @@ if __name__ == '__main__':
         raise Exception
     # 读取输入excel
     try:
-        load = pd.read_excel('Input/input_24h.xls')
+        load = pd.read_excel('Input/input_720h.xls')
     except BaseException as E:
-        _logging.error('读取input_24h的excel失败,错误原因为{}'.format(E))
+        _logging.error('读取input_720h的excel失败,错误原因为{}'.format(E))
         raise Exception
     try:
         sto = pd.read_excel('Input/input_now.xls')
     except BaseException as E:
         _logging.error('读取input_now的excel失败,错误原因为{}'.format(E))
         raise Exception
-    
-    sto_end = sto.copy()
-    sto_end['time']=24
-    sto_end.index = [24]
+    try:
+        sto_end = pd.read_excel('Input/input_end.xls')
+
+    except BaseException as E:
+        _logging.error('读取input_end的excel失败,错误原因为{}'.format(E))
+        raise Exception
+    sto_end['time']=time_length
+    sto_end.index = [time_length]
     # 优化主函数
     try:
-        dict_control,dict_plot = OptimizationDay(parameter_json=input_json, load_json=load, begin_time = 0, time_scale=24, storage_begin_json=sto, storage_end_json=sto_end)
+        dict_control,dict_plot = OptimizationDay(parameter_json=input_json, load_json=load, begin_time = 0, time_scale=time_length, storage_begin_json=sto, storage_end_json=sto_end)
     except BaseException as E:
         _logging.error('优化主函数执行失败，错误原因为{}'.format(E))
         raise Exception
@@ -86,7 +91,7 @@ if __name__ == '__main__':
     # 写入输出Excel
     try:
         to_csv(dict_control,"dict_opt_control_24h")
-        to_csv(dict_plot,"dict_opt_plot_24h")
+        # to_csv(dict_plot,"dict_opt_plot_24h")
     except BaseException as E:
         _logging.error('excel输出失败,错误原因为{}'.format(E))
         raise Exception
