@@ -70,8 +70,8 @@
                 "water_max":500000,
 
 
-                "t_max":82,
-                "t_min":4,
+                "t_max":55,
+                "t_min":45,
                 "t_wetbulb":20,
                 "t_supply":55,
                 "miu_loss":0.02,
