@@ -58,7 +58,7 @@ def OptimizationDay(parameter_json,load_json,begin_time,time_scale,storage_begin
         storage_end_json (_type_): 末端储能状态
     """
     # 一些常熟参数
-    c = 4200/3.6/1000000 #kwh/(kg*℃)
+    c = 4200/3.6/1000 #kwh/(吨*℃)
     period = time_scale
 
     # 初始化设备效率参数
@@ -117,7 +117,7 @@ def OptimizationDay(parameter_json,load_json,begin_time,time_scale,storage_begin
     # 初始化价格
     try:
         lambda_ele_in = parameter_json['price']['ele_TOU_price']
-        lambda_ele_in=lambda_ele_in*31
+        lambda_ele_in=lambda_ele_in*(int(time_scale/24))
         # lambda_ele_out = parameter_json['price']['power_sale']
         hydrogen_price = parameter_json['price']['hydrogen_price']
         p_demand_price=parameter_json['price']['demand_electricity_price']
@@ -256,7 +256,7 @@ def OptimizationDay(parameter_json,load_json,begin_time,time_scale,storage_begin
         #m.addConstr(c*m_ct*(t_ct[i] - t_ct_l[i] - ct_loss * (t_ct_l[i] - t_ct_wetbulb)) + q_hp[i] == q_load[i])
         # m.addConstr(c*m_ct*(t_ct[i] - t_ct_l[i]) + q_hp[i] == q_load[i])
 
-        # m.addConstr(h_sto[i] - h_sto_l[i] == h_pur[i] + h_el[i] - h_fc[i])
+        m.addConstr(0 == h_pur[i] - h_fc[i])
         
         #最大需量
         m.addConstr(p_demand_max>=p_pur[i])
@@ -265,11 +265,11 @@ def OptimizationDay(parameter_json,load_json,begin_time,time_scale,storage_begin
 
         # 工况约束
         m.addConstr(z_a[i]*g_ht[i]>=0)
-        m.addConstr(g_ht[i]+z_b[i]*g_eb[i]+z_c[i]*g_fc[i]+z_d[i]*g_hp[i]+z_e[i]*(g_fc[i]+g_hp[i])==0)
-        m.addConstr(z_a[i]+z_b[i]+z_c[i]+z_d[i]+z_e[i]<=1)
+        m.addConstr(g_ht[i]+z_b[i]*g_eb[i]+z_c[i]*g_fc[i]+z_d[i]*g_hp[i]+z_e[i]*(g_fc[i]+g_hp[i])>=0)
+        m.addConstr(z_a[i]+z_b[i]+z_c[i]+z_d[i]+z_e[i]==1)
 
         #给末端供热的约束
-        m.addConstr(c*m_de*(t_de[i]-t_de_l[i]) == g_ht[i]+g_eb[i]+g_fc[i]+g_hp[i]-g_load[i]-de_loss*(t_de_l[i]-t_tem[i]))
+        m.addConstr(c*m_de*(t_de[i]-t_de_l[i]) == g_ht[i]*z_a[i]+g_eb[i]*(1-z_b[i])+g_fc[i]*(1-z_c[i]-z_e[i])+g_hp[i]*(1-z_d[i]-z_e[i])-g_load[i]-de_loss*(t_de_l[i]-t_tem[i])*m_de)
 
 
 
@@ -301,11 +301,11 @@ def OptimizationDay(parameter_json,load_json,begin_time,time_scale,storage_begin
         # m.addConstr(p_hp[i] <= p_hp_max)
         # m.addConstr(q_hp[i] == k_hp_q * p_hp[i])
         m.addConstr(g_hp[i] == cop_hp[i] * 300*z_hp[i])
-        m.addConstr(cop_hp[i]==4.8781+0.1209*t_gtw_out[i])
+        m.addConstr(cop_hp[i]==2+0.1209*t_gtw_out[i])
         m.addConstr(g_gtw[i]==g_hp[i]-300*z_hp[i])
         m.addConstr(g_gtw[i]==c*m_gtw*(t_gtw_out[i]-t_gtw_in[i]))
         m.addConstr(t_gtw_out[i]==k_gtw_fluid*(t_gtw_out[i]-t_b[i])+t_b[i])
-        m.addConstr(t_b[i]==10-(1000/(2*np.pi*2.07*200*192))*gp.quicksum((g_gtw[j]-g_gtw_l[j])*g_func[i-j] for j in range(i+1)))
+        m.addConstr(t_b[i]==8-(1000/(2*np.pi*2.07*200*192))*gp.quicksum((g_gtw[j]-g_gtw_l[j])*g_func[i-j] for j in range(i+1)))
 
 
 
@@ -323,19 +323,23 @@ def OptimizationDay(parameter_json,load_json,begin_time,time_scale,storage_begin
 
         ## ht
         ### ht温度变化
-        m.addConstr(c*m_ht*(t_ht[i]-t_ht_l[i])==-g_ht[i]-ht_loss*(t_ht_l[i]-t_tem[i]))
+        m.addConstr(c*m_ht*(t_ht[i]-t_ht_l[i])==-g_ht[i]-ht_loss*(t_ht_l[i]-t_tem[i])*m_ht)
         ### ht供热温度约束
         m.addConstr(t_ht_l[i]-t_de_l[i]+tem_diff/2>=100*(z_ht_de[i]-1))
         m.addConstr(g_ht[i]<=c*m_de*(t_ht_l[i]-t_de_l[i])*z_ht_de[i])
+        # m.addConstr(t_ht_l[i]-45>=100*(z_ht_de[i]-1))
+        # m.addConstr(t_ht_l[i]-45<=100*(z_ht_de[i]))
+        # m.addConstr(g_ht[i]<=c*m_de*(t_ht_l[i]-45)*z_ht_de[i])
 
         ## opex 
         m.addConstr(opex[i] == hydrogen_price * h_pur[i] + p_pur[i] * lambda_ele_in[i])
     # set objective
     
-    m.setObjective(gp.quicksum(opex)+p_demand_price*p_demand_max, GRB.MINIMIZE)
+    m.setObjective(gp.quicksum(opex)+p_demand_price*p_demand_max/24/30*time_scale, GRB.MINIMIZE)
+    # m.setObjective(gp.quicksum(opex), GRB.MINIMIZE)
     m.params.NonConvex = 2
     m.params.MIPGap = 0.01
-    m.params.TimeLimit=300
+    # m.params.TimeLimit=300
     m.Params.LogFile = "testlog.log"
 
     try:
@@ -365,7 +369,7 @@ def OptimizationDay(parameter_json,load_json,begin_time,time_scale,storage_begin
 
         # ele
         'opex':[opex[i].x for i in range(period)],
-        'p_demand_max':p_demand_max.x,
+        'p_demand_price':p_demand_price*p_demand_max.x/24/30*time_scale,
         'operation_mode':[z_a[i].x*1+z_b[i].x*2+z_c[i].x*3+z_d[i].x*4+z_e[i].x*5 for i in range(period)],
         'p_eb':[p_eb[i].x for i in range(period)],
         'p_fc':[p_fc[i].x for i in range(period)],
@@ -373,12 +377,15 @@ def OptimizationDay(parameter_json,load_json,begin_time,time_scale,storage_begin
         'z_hp':[z_hp[i].x for i in range(period)],
         'p_pur':[p_pur[i].x for i in range(period)],
         'p_load':[p_load[i] for i in range(period)],
+        'lambda_ele_in':[lambda_ele_in[i]for i in range(period)],
         'g_fc':[g_fc[i].x for i in range(period)],
         'g_eb':[g_eb[i].x for i in range(period)],
         'g_hp':[g_hp[i].x for i in range(period)],
         'g_ht':[g_ht[i].x for i in range(period)],
         'g_load':[g_load[i] for i in range(period)],
+        'z_ht_de':[z_ht_de[i].x for i in range(period)],
         'h_pur':[h_pur[i].x for i in range(period)],
+        'cop_hp':[cop_hp[i].x for i in range(period)],
         'g_gtw':[g_gtw[i].x for i in range(period)],
         't_gtw_out':[t_gtw_out[i].x for i in range(period)],
         't_gtw_in':[t_gtw_in[i].x for i in range(period)],
