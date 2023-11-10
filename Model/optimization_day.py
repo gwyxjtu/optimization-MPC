@@ -246,6 +246,7 @@ def OptimizationDay(parameter_json,load_json,begin_time,time_scale,storage_begin
     m.addConstrs(t_de[i] == t_de_l[i+1] for i in range(period-1))
     m.addConstrs(g_gtw[i] == g_gtw_l[i+1] for i in range(period-1))
 
+    m.addConstr(gp.quicksum(z_hp)<=period*2/3)
     for i in range(period):
         # 能量平衡
         # m.addConstr(p_fc[i] + p_pur[i] + p_pv[i] == p_el[i] + p_eb[i] + p_hp[i]  + p_pump[i] + p_load[i])
@@ -300,6 +301,7 @@ def OptimizationDay(parameter_json,load_json,begin_time,time_scale,storage_begin
         ## hp
         # m.addConstr(p_hp[i] <= p_hp_max)
         # m.addConstr(q_hp[i] == k_hp_q * p_hp[i])
+        
         m.addConstr(g_hp[i] == cop_hp[i] * 300*z_hp[i])
         m.addConstr(cop_hp[i]==2+0.1209*t_gtw_out[i])
         m.addConstr(g_gtw[i]==g_hp[i]-300*z_hp[i])
