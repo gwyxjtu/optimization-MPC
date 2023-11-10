@@ -90,7 +90,7 @@ if __name__ == '__main__':
     
     # 写入输出Excel
     try:
-        to_csv(dict_control,"1109/control_strategy_ht19_hydrogen1792")
+        to_csv(dict_control,"1109/control_strategy_ht19_hydrogen70")
         # to_csv(dict_plot,"dict_opt_plot_24h")
     except BaseException as E:
         _logging.error('excel输出失败,错误原因为{}'.format(E))
