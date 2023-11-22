@@ -72,7 +72,8 @@ if __name__ == '__main__':
         raise Exception
     
     sto_end = sto.copy()
-    sto_end['time']=24
+    sto_end['time'] = 24
+    sto_end['end_slack'] = True
     sto_end.index = [24]
     # 优化主函数
     try:
