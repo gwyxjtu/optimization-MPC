@@ -1,9 +1,9 @@
 '''
 Author: gwyxjtu
 Date: 2022-06-06 20:10:39
-LastEditors: guo_win 867718012@qq.com
-LastEditTime: 2023-09-08 14:32:34
-FilePath: \optimization\optimization_24h.py
+LastEditors: yxs 572412425@qq.com
+LastEditTime: 2023-11-25 11:12:40
+FilePath: \设备能效计算\mx\optimization-MPC\optimization_24h.py
 Description: 人一生会遇到约2920万人,两个人相爱的概率是0.000049,所以你不爱我,我不怪你.
 
 Copyright (c) 2022 by gwyxjtu 867718012@qq.com, All Rights Reserved. 
@@ -62,17 +62,17 @@ if __name__ == '__main__':
         raise Exception
     # 读取输入excel
     try:
-        load = pd.read_excel('input_720/1109/ht19/input_720h.xls')
+        load = pd.read_excel('input_720/1122/current_load/input_720h.xls')
     except BaseException as E:
         _logging.error('读取input_720h的excel失败,错误原因为{}'.format(E))
         raise Exception
     try:
-        sto = pd.read_excel('input_720/1109/ht19/input_now.xls')
+        sto = pd.read_excel('input_720/1122/current_load/input_now.xls')
     except BaseException as E:
         _logging.error('读取input_now的excel失败,错误原因为{}'.format(E))
         raise Exception
     try:
-        sto_end = pd.read_excel('input_720/1109/ht19/input_end.xls')
+        sto_end = pd.read_excel('input_720/1122/current_load/input_end.xls')
 
     except BaseException as E:
         _logging.error('读取input_end的excel失败,错误原因为{}'.format(E))
@@ -90,7 +90,7 @@ if __name__ == '__main__':
     
     # 写入输出Excel
     try:
-        to_csv(dict_control,"1109/control_strategy_ht19_hydrogen70")
+        to_csv(dict_control,"1122/current_load/control_strategy_ht300_hydrogen1792_loss_hp_de150_eb2800")
         # to_csv(dict_plot,"dict_opt_plot_24h")
     except BaseException as E:
         _logging.error('excel输出失败,错误原因为{}'.format(E))

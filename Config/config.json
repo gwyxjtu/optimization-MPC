@@ -8,7 +8,7 @@
         "power_sale":0.38,
         "gas_price":4.085,
 
-        "hydrogen_price":70,
+        "hydrogen_price":17.92,
         "demand_electricity_price":35.2
         
     },
@@ -28,6 +28,21 @@
                 "eta_fc_p":14.15,
                 "eta_fc_g":18.85,
                 "theta_ex":0.85,
+                "power_200":
+                {
+                    "g_p_ratio":1,
+                    "theta_ex":0.85
+                },
+                "power_400":
+                {
+                    "g_p_ratio":1.25,
+                    "theta_ex":0.85
+                },
+                "power_600":
+                {
+                    "g_p_ratio":1.55,
+                    "theta_ex":0.85
+                },
                 "comment":"fuel cell"
             },
         "el":
@@ -56,7 +71,7 @@
         "eb":
             {
                 "power_max":2800,
-                "beta_eb":0.95,
+                "beta_eb":0.85,
                 "comment":"electric boiler"
             },  
         "ec":
@@ -67,14 +82,14 @@
             },
         "ht":
             {
-                "water_max":500,
+                "water_max":300,
 
 
                 "t_max":55,
                 "t_min":45,
                 "t_wetbulb":20,
                 "t_supply":55,
-                "miu_loss":0.005,
+                "miu_loss":0.001,
                 "end_slack":0.2,
                 "comment":"water tank"
             },
@@ -103,7 +118,7 @@
                 "number_max":42,
                 "cost":30000,
                 "crf":30,
-                "water_max":300,
+                "water_max":240,
                 "t_in_min":4,
                 "beta_gtw":7,
                 "comment":"ground thermal well"
@@ -129,10 +144,10 @@
             },
         "de":
             {
-                "water_max":376.8,
+                "water_max":150,
                 "t_max":52,
                 "t_min":47,
-                "miu_loss":0.02,
+                "miu_loss":0.15,
                 "temperature_difference":5,
                 "comment":"供暖管道"
             }
