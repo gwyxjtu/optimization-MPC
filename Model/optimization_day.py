@@ -211,10 +211,10 @@ def OptimizationDay(parameter_json,load_json,begin_time,time_scale,storage_begin
         m.addConstr(t_ct[-1] <= t_ct_start * (1+slack_ct))
         m.addConstr(h_sto[-1] >= hst_kg_start * (1-slack_hsto))
         m.addConstr(h_sto[-1] <= hst_kg_start * (1+slack_hsto))
-    # # 储能约束
-    # m.addConstr(t_ht_l[0] == t_ht_start)
-    # m.addConstr(t_ct_l[0] == t_ct_start)
-    # m.addConstr(h_sto_l[0] == hst_kg_start)
+    # 储能约束
+    m.addConstr(t_ht_l[0] == t_ht_start)
+    m.addConstr(t_ct_l[0] == t_ct_start)
+    m.addConstr(h_sto_l[0] == hst_kg_start)
 
     m.addConstrs(t_ht[i] == t_ht_l[i+1] for i in range(period-1))
     m.addConstrs(t_ct[i] == t_ct_l[i+1] for i in range(period-1))
@@ -365,7 +365,9 @@ def OptimizationDay(parameter_json,load_json,begin_time,time_scale,storage_begin
         #hydrogen
         'h_hst':[h_sto[i].x for i in range(period)],
         #thermal
-        't_ht':[t_ht[i].x for i in range(period)],  
+        't_ht':[t_ht[i].x for i in range(period)],
+        't_ct': [t_ct[i].x for i in range(period)],
+        'h_tube': [hydrogen_bottle_max_start - sum([h_pur[i].x for i in range(j)]) for j in range(period)],
     }
     return dict_control,dict_plot
 

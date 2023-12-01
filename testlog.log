@@ -174,3 +174,551 @@ Iteration    Objective       Primal Inf.    Dual Inf.      Time
 
 Solved in 22 iterations and 0.00 seconds (0.00 work units)
 Optimal objective  0.000000000e+00
+
+Gurobi 10.0.3 (win64) logging started Wed Nov 29 15:38:50 2023
+
+Set parameter LogFile to value "testlog.log"
+Gurobi Optimizer version 10.0.3 build v10.0.3rc0 (win64)
+
+CPU model: Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz, instruction set [SSE2|AVX|AVX2]
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+
+Optimize a model with 112 rows, 84 columns and 220 nonzeros
+Model fingerprint: 0x610086f3
+Coefficient statistics:
+  Matrix range     [2e-02, 2e+02]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [4e+00, 1e+03]
+Presolve removed 112 rows and 84 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    5.8843600e+02   0.000000e+00   0.000000e+00      0s
+
+Solved in 0 iterations and 0.00 seconds (0.00 work units)
+Optimal objective  5.884360000e+02
+
+Gurobi 10.0.3 (win64) logging started Wed Nov 29 15:38:50 2023
+
+Set parameter LogFile to value "testlog.log"
+Gurobi Optimizer version 10.0.3 build v10.0.3rc0 (win64)
+
+CPU model: Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz, instruction set [SSE2|AVX|AVX2]
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+
+Optimize a model with 112 rows, 84 columns and 220 nonzeros
+Model fingerprint: 0xf4021dc2
+Coefficient statistics:
+  Matrix range     [2e-02, 2e+02]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [4e+00, 1e+03]
+Presolve removed 112 rows and 84 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    4.4976000e+02   0.000000e+00   0.000000e+00      0s
+
+Solved in 0 iterations and 0.00 seconds (0.00 work units)
+Optimal objective  4.497600000e+02
+
+Gurobi 10.0.3 (win64) logging started Wed Nov 29 15:38:58 2023
+
+Set parameter LogFile to value "testlog.log"
+Gurobi Optimizer version 10.0.3 build v10.0.3rc0 (win64)
+
+CPU model: Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz, instruction set [SSE2|AVX|AVX2]
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+
+Optimize a model with 112 rows, 84 columns and 220 nonzeros
+Model fingerprint: 0x51e42dd0
+Coefficient statistics:
+  Matrix range     [2e-02, 2e+02]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [4e+00, 1e+03]
+Presolve removed 112 rows and 84 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    1.2743200e+02   0.000000e+00   0.000000e+00      0s
+
+Solved in 0 iterations and 0.00 seconds (0.00 work units)
+Optimal objective  1.274320000e+02
+
+Gurobi 10.0.3 (win64) logging started Wed Nov 29 15:38:58 2023
+
+Set parameter LogFile to value "testlog.log"
+Gurobi Optimizer version 10.0.3 build v10.0.3rc0 (win64)
+
+CPU model: Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz, instruction set [SSE2|AVX|AVX2]
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+
+Optimize a model with 112 rows, 84 columns and 220 nonzeros
+Model fingerprint: 0x598ffe22
+Coefficient statistics:
+  Matrix range     [2e-02, 2e+02]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [4e+00, 1e+03]
+Presolve removed 112 rows and 84 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    1.2743200e+02   0.000000e+00   0.000000e+00      0s
+
+Solved in 0 iterations and 0.00 seconds (0.00 work units)
+Optimal objective  1.274320000e+02
+
+Gurobi 10.0.3 (win64) logging started Wed Nov 29 15:38:59 2023
+
+Set parameter LogFile to value "testlog.log"
+Gurobi Optimizer version 10.0.3 build v10.0.3rc0 (win64)
+
+CPU model: Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz, instruction set [SSE2|AVX|AVX2]
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+
+Optimize a model with 112 rows, 84 columns and 220 nonzeros
+Model fingerprint: 0x442398a5
+Coefficient statistics:
+  Matrix range     [2e-02, 2e+02]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [4e+00, 1e+03]
+Presolve removed 112 rows and 84 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    1.2743200e+02   0.000000e+00   0.000000e+00      0s
+
+Solved in 0 iterations and 0.00 seconds (0.00 work units)
+Optimal objective  1.274320000e+02
+
+Gurobi 10.0.3 (win64) logging started Wed Nov 29 15:38:59 2023
+
+Set parameter LogFile to value "testlog.log"
+Gurobi Optimizer version 10.0.3 build v10.0.3rc0 (win64)
+
+CPU model: Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz, instruction set [SSE2|AVX|AVX2]
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+
+Optimize a model with 112 rows, 84 columns and 220 nonzeros
+Model fingerprint: 0x353c11a8
+Coefficient statistics:
+  Matrix range     [2e-02, 2e+02]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [4e+00, 1e+03]
+Presolve removed 112 rows and 84 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    1.3830120e+02   0.000000e+00   0.000000e+00      0s
+
+Solved in 0 iterations and 0.00 seconds (0.00 work units)
+Optimal objective  1.383012000e+02
+
+Gurobi 10.0.3 (win64) logging started Wed Nov 29 15:38:59 2023
+
+Set parameter LogFile to value "testlog.log"
+Gurobi Optimizer version 10.0.3 build v10.0.3rc0 (win64)
+
+CPU model: Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz, instruction set [SSE2|AVX|AVX2]
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+
+Optimize a model with 112 rows, 84 columns and 220 nonzeros
+Model fingerprint: 0xb1360da8
+Coefficient statistics:
+  Matrix range     [2e-02, 2e+02]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [4e+00, 1e+03]
+Presolve removed 110 rows and 81 columns
+Presolve time: 0.00s
+Presolved: 2 rows, 3 columns, 4 nonzeros
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    1.0644320e+02   0.000000e+00   0.000000e+00      0s
+       0    1.0644320e+02   0.000000e+00   0.000000e+00      0s
+
+Solved in 0 iterations and 0.00 seconds (0.00 work units)
+Optimal objective  1.064432000e+02
+
+Gurobi 10.0.3 (win64) logging started Wed Nov 29 15:38:59 2023
+
+Set parameter LogFile to value "testlog.log"
+Gurobi Optimizer version 10.0.3 build v10.0.3rc0 (win64)
+
+CPU model: Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz, instruction set [SSE2|AVX|AVX2]
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+
+Optimize a model with 112 rows, 84 columns and 220 nonzeros
+Model fingerprint: 0x6f8e526d
+Coefficient statistics:
+  Matrix range     [2e-02, 2e+02]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [4e+00, 1e+03]
+Presolve removed 109 rows and 79 columns
+Presolve time: 0.00s
+Presolved: 3 rows, 5 columns, 7 nonzeros
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    7.4585200e+01   7.125000e+01   0.000000e+00      0s
+       1    7.4585200e+01   0.000000e+00   0.000000e+00      0s
+
+Solved in 1 iterations and 0.00 seconds (0.00 work units)
+Optimal objective  7.458520000e+01
+
+Gurobi 10.0.3 (win64) logging started Wed Nov 29 15:38:59 2023
+
+Set parameter LogFile to value "testlog.log"
+Gurobi Optimizer version 10.0.3 build v10.0.3rc0 (win64)
+
+CPU model: Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz, instruction set [SSE2|AVX|AVX2]
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+
+Optimize a model with 112 rows, 84 columns and 220 nonzeros
+Model fingerprint: 0x1dc34285
+Coefficient statistics:
+  Matrix range     [2e-02, 2e+02]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [4e+00, 1e+03]
+Presolve removed 112 rows and 84 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    4.2727200e+01   0.000000e+00   0.000000e+00      0s
+
+Solved in 0 iterations and 0.00 seconds (0.00 work units)
+Optimal objective  4.272720000e+01
+
+Gurobi 10.0.3 (win64) logging started Wed Nov 29 15:38:59 2023
+
+Set parameter LogFile to value "testlog.log"
+Gurobi Optimizer version 10.0.3 build v10.0.3rc0 (win64)
+
+CPU model: Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz, instruction set [SSE2|AVX|AVX2]
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+
+Optimize a model with 112 rows, 84 columns and 220 nonzeros
+Model fingerprint: 0x4fdbc820
+Coefficient statistics:
+  Matrix range     [2e-02, 2e+02]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [4e+00, 1e+03]
+Presolve removed 107 rows and 76 columns
+Presolve time: 0.00s
+Presolved: 5 rows, 8 columns, 12 nonzeros
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    0.0000000e+00   3.410000e+02   0.000000e+00      0s
+       2    0.0000000e+00   0.000000e+00   0.000000e+00      0s
+
+Solved in 2 iterations and 0.00 seconds (0.00 work units)
+Optimal objective  0.000000000e+00
+
+Gurobi 10.0.3 (win64) logging started Wed Nov 29 15:38:59 2023
+
+Set parameter LogFile to value "testlog.log"
+Gurobi Optimizer version 10.0.3 build v10.0.3rc0 (win64)
+
+CPU model: Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz, instruction set [SSE2|AVX|AVX2]
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+
+Optimize a model with 112 rows, 84 columns and 220 nonzeros
+Model fingerprint: 0x53587bd1
+Coefficient statistics:
+  Matrix range     [2e-02, 2e+02]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [4e+00, 1e+03]
+Presolve removed 108 rows and 77 columns
+Presolve time: 0.00s
+Presolved: 4 rows, 7 columns, 10 nonzeros
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    0.0000000e+00   3.120000e+02   0.000000e+00      0s
+       3    0.0000000e+00   0.000000e+00   0.000000e+00      0s
+
+Solved in 3 iterations and 0.00 seconds (0.00 work units)
+Optimal objective  0.000000000e+00
+
+Gurobi 10.0.3 (win64) logging started Wed Nov 29 15:38:59 2023
+
+Set parameter LogFile to value "testlog.log"
+Gurobi Optimizer version 10.0.3 build v10.0.3rc0 (win64)
+
+CPU model: Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz, instruction set [SSE2|AVX|AVX2]
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+
+Optimize a model with 112 rows, 84 columns and 220 nonzeros
+Model fingerprint: 0xf19fa996
+Coefficient statistics:
+  Matrix range     [2e-02, 2e+02]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [4e+00, 1e+03]
+Presolve removed 112 rows and 84 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    0.0000000e+00   0.000000e+00   0.000000e+00      0s
+
+Solved in 0 iterations and 0.00 seconds (0.00 work units)
+Optimal objective  0.000000000e+00
+
+Gurobi 10.0.3 (win64) logging started Wed Nov 29 15:38:59 2023
+
+Set parameter LogFile to value "testlog.log"
+Gurobi Optimizer version 10.0.3 build v10.0.3rc0 (win64)
+
+CPU model: Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz, instruction set [SSE2|AVX|AVX2]
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+
+Optimize a model with 112 rows, 84 columns and 220 nonzeros
+Model fingerprint: 0x3f633632
+Coefficient statistics:
+  Matrix range     [2e-02, 2e+02]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [4e+00, 1e+03]
+Presolve removed 109 rows and 80 columns
+Presolve time: 0.00s
+Presolved: 3 rows, 4 columns, 6 nonzeros
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    0.0000000e+00   1.686253e+02   0.000000e+00      0s
+       1    0.0000000e+00   0.000000e+00   0.000000e+00      0s
+
+Solved in 1 iterations and 0.00 seconds (0.00 work units)
+Optimal objective  0.000000000e+00
+
+Gurobi 10.0.3 (win64) logging started Wed Nov 29 15:38:59 2023
+
+Set parameter LogFile to value "testlog.log"
+Gurobi Optimizer version 10.0.3 build v10.0.3rc0 (win64)
+
+CPU model: Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz, instruction set [SSE2|AVX|AVX2]
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+
+Optimize a model with 112 rows, 84 columns and 220 nonzeros
+Model fingerprint: 0x48fd237d
+Coefficient statistics:
+  Matrix range     [2e-02, 2e+02]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [4e+00, 1e+03]
+Presolve removed 109 rows and 80 columns
+Presolve time: 0.00s
+Presolved: 3 rows, 4 columns, 6 nonzeros
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    0.0000000e+00   1.881000e+02   0.000000e+00      0s
+       1    0.0000000e+00   0.000000e+00   0.000000e+00      0s
+
+Solved in 1 iterations and 0.00 seconds (0.00 work units)
+Optimal objective  0.000000000e+00
+
+Gurobi 10.0.3 (win64) logging started Wed Nov 29 15:38:59 2023
+
+Set parameter LogFile to value "testlog.log"
+Gurobi Optimizer version 10.0.3 build v10.0.3rc0 (win64)
+
+CPU model: Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz, instruction set [SSE2|AVX|AVX2]
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+
+Optimize a model with 112 rows, 84 columns and 220 nonzeros
+Model fingerprint: 0x1cdf0575
+Coefficient statistics:
+  Matrix range     [2e-02, 2e+02]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [4e+00, 1e+03]
+Presolve removed 108 rows and 77 columns
+Presolve time: 0.00s
+Presolved: 4 rows, 7 columns, 10 nonzeros
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    0.0000000e+00   3.292500e+02   0.000000e+00      0s
+       2    0.0000000e+00   0.000000e+00   0.000000e+00      0s
+
+Solved in 2 iterations and 0.00 seconds (0.00 work units)
+Optimal objective  0.000000000e+00
+
+Gurobi 10.0.3 (win64) logging started Wed Nov 29 15:38:59 2023
+
+Set parameter LogFile to value "testlog.log"
+Gurobi Optimizer version 10.0.3 build v10.0.3rc0 (win64)
+
+CPU model: Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz, instruction set [SSE2|AVX|AVX2]
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+
+Optimize a model with 112 rows, 84 columns and 220 nonzeros
+Model fingerprint: 0x4f72b354
+Coefficient statistics:
+  Matrix range     [2e-02, 2e+02]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [4e+00, 1e+03]
+Presolve removed 107 rows and 76 columns
+Presolve time: 0.00s
+Presolved: 5 rows, 8 columns, 12 nonzeros
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    0.0000000e+00   2.512500e+02   0.000000e+00      0s
+       1    0.0000000e+00   0.000000e+00   0.000000e+00      0s
+
+Solved in 1 iterations and 0.00 seconds (0.00 work units)
+Optimal objective  0.000000000e+00
+
+Gurobi 10.0.3 (win64) logging started Wed Nov 29 15:38:59 2023
+
+Set parameter LogFile to value "testlog.log"
+Gurobi Optimizer version 10.0.3 build v10.0.3rc0 (win64)
+
+CPU model: Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz, instruction set [SSE2|AVX|AVX2]
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+
+Optimize a model with 112 rows, 84 columns and 220 nonzeros
+Model fingerprint: 0xfa617632
+Coefficient statistics:
+  Matrix range     [2e-02, 2e+02]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [4e+00, 1e+03]
+Presolve removed 110 rows and 81 columns
+Presolve time: 0.00s
+Presolved: 2 rows, 3 columns, 5 nonzeros
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    1.3478708e+02   1.921998e+00   0.000000e+00      0s
+       1    1.4055000e+02   0.000000e+00   0.000000e+00      0s
+
+Solved in 1 iterations and 0.00 seconds (0.00 work units)
+Optimal objective  1.405500000e+02
+
+Gurobi 10.0.3 (win64) logging started Wed Nov 29 15:38:59 2023
+
+Set parameter LogFile to value "testlog.log"
+Gurobi Optimizer version 10.0.3 build v10.0.3rc0 (win64)
+
+CPU model: Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz, instruction set [SSE2|AVX|AVX2]
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+
+Optimize a model with 112 rows, 84 columns and 220 nonzeros
+Model fingerprint: 0x0fea0654
+Coefficient statistics:
+  Matrix range     [2e-02, 2e+02]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [4e+00, 1e+03]
+Presolve removed 112 rows and 84 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    3.4669000e+02   0.000000e+00   0.000000e+00      0s
+
+Solved in 0 iterations and 0.00 seconds (0.00 work units)
+Optimal objective  3.466900000e+02
+
+Gurobi 10.0.3 (win64) logging started Wed Nov 29 15:38:59 2023
+
+Set parameter LogFile to value "testlog.log"
+Gurobi Optimizer version 10.0.3 build v10.0.3rc0 (win64)
+
+CPU model: Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz, instruction set [SSE2|AVX|AVX2]
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+
+Optimize a model with 112 rows, 84 columns and 220 nonzeros
+Model fingerprint: 0x904aa15c
+Coefficient statistics:
+  Matrix range     [2e-02, 2e+02]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [4e+00, 1e+03]
+Presolve removed 112 rows and 84 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    5.0410600e+02   0.000000e+00   0.000000e+00      0s
+
+Solved in 0 iterations and 0.00 seconds (0.00 work units)
+Optimal objective  5.041060000e+02
+
+Gurobi 10.0.3 (win64) logging started Wed Nov 29 15:38:59 2023
+
+Set parameter LogFile to value "testlog.log"
+Gurobi Optimizer version 10.0.3 build v10.0.3rc0 (win64)
+
+CPU model: Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz, instruction set [SSE2|AVX|AVX2]
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+
+Optimize a model with 112 rows, 84 columns and 220 nonzeros
+Model fingerprint: 0x1936b9f1
+Coefficient statistics:
+  Matrix range     [2e-02, 2e+02]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [4e+00, 1e+03]
+Presolve removed 106 rows and 68 columns
+Presolve time: 0.00s
+Presolved: 6 rows, 16 columns, 32 nonzeros
+
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    1.8619790e+01   3.203316e+02   0.000000e+00      0s
+       7    5.2274480e+02   0.000000e+00   0.000000e+00      0s
+
+Solved in 7 iterations and 0.00 seconds (0.00 work units)
+Optimal objective  5.227448040e+02
+
+Gurobi 10.0.3 (win64) logging started Wed Nov 29 15:38:59 2023
+
+Set parameter LogFile to value "testlog.log"
+Gurobi Optimizer version 10.0.3 build v10.0.3rc0 (win64)
+
+CPU model: Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz, instruction set [SSE2|AVX|AVX2]
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+
+Optimize a model with 112 rows, 84 columns and 220 nonzeros
+Model fingerprint: 0x610086f3
+Coefficient statistics:
+  Matrix range     [2e-02, 2e+02]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [4e+00, 1e+03]
+Presolve removed 112 rows and 84 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    5.8843600e+02   0.000000e+00   0.000000e+00      0s
+
+Solved in 0 iterations and 0.00 seconds (0.00 work units)
+Optimal objective  5.884360000e+02
+
+Gurobi 10.0.3 (win64) logging started Wed Nov 29 15:38:59 2023
+
+Set parameter LogFile to value "testlog.log"
+Gurobi Optimizer version 10.0.3 build v10.0.3rc0 (win64)
+
+CPU model: Intel(R) Core(TM) i5-10210U CPU @ 1.60GHz, instruction set [SSE2|AVX|AVX2]
+Thread count: 4 physical cores, 8 logical processors, using up to 8 threads
+
+Optimize a model with 112 rows, 84 columns and 220 nonzeros
+Model fingerprint: 0xf4021dc2
+Coefficient statistics:
+  Matrix range     [2e-02, 2e+02]
+  Objective range  [1e+00, 1e+00]
+  Bounds range     [0e+00, 0e+00]
+  RHS range        [4e+00, 1e+03]
+Presolve removed 112 rows and 84 columns
+Presolve time: 0.00s
+Presolve: All rows and columns removed
+Iteration    Objective       Primal Inf.    Dual Inf.      Time
+       0    4.4976000e+02   0.000000e+00   0.000000e+00      0s
+
+Solved in 0 iterations and 0.00 seconds (0.00 work units)
+Optimal objective  4.497600000e+02
