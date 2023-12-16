@@ -2,7 +2,7 @@
 Author: gwyxjtu
 Date: 2022-06-06 20:10:39
 LastEditors: yxs 572412425@qq.com
-LastEditTime: 2023-11-25 11:12:40
+LastEditTime: 2023-12-12 19:36:55
 FilePath: \设备能效计算\mx\optimization-MPC\optimization_24h.py
 Description: 人一生会遇到约2920万人,两个人相爱的概率是0.000049,所以你不爱我,我不怪你.
 
@@ -52,6 +52,14 @@ from Model.optimization_day import OptimizationDay,to_csv
 
 
 if __name__ == '__main__':
+
+
+    # g_load={'g_load_18':([3800]*11+[2200]*7+[3800]*6)*60,
+    # #         'g_load_26':([2500]*11+[1600]*7+[2500]*6)*60,
+    #         # 'g_load_32':([3200]*11+[2000]*7+[3200]*6)*60
+    
+    #         }
+    # pd.DataFrame(g_load).to_csv('hh38.csv')
     _logging.info('start')
     time_length=24*30
     try:
@@ -62,17 +70,17 @@ if __name__ == '__main__':
         raise Exception
     # 读取输入excel
     try:
-        load = pd.read_excel('input_720/1122/current_load/input_720h.xls')
+        load = pd.read_excel('input_720/1128/3840_2200/input_720h.xls')
     except BaseException as E:
         _logging.error('读取input_720h的excel失败,错误原因为{}'.format(E))
         raise Exception
     try:
-        sto = pd.read_excel('input_720/1122/current_load/input_now.xls')
+        sto = pd.read_excel('input_720/1128/3840_2200/input_now.xls')
     except BaseException as E:
         _logging.error('读取input_now的excel失败,错误原因为{}'.format(E))
         raise Exception
     try:
-        sto_end = pd.read_excel('input_720/1122/current_load/input_end.xls')
+        sto_end = pd.read_excel('input_720/1128/3840_2200/input_end.xls')
 
     except BaseException as E:
         _logging.error('读取input_end的excel失败,错误原因为{}'.format(E))
@@ -90,7 +98,7 @@ if __name__ == '__main__':
     
     # 写入输出Excel
     try:
-        to_csv(dict_control,"1122/current_load/control_strategy_ht300_hydrogen1792_loss_hp_de150_eb2800")
+        to_csv(dict_control,"1128/3840_2200/ht300_hydrogen70_de150_eb82_ghp95")
         # to_csv(dict_plot,"dict_opt_plot_24h")
     except BaseException as E:
         _logging.error('excel输出失败,错误原因为{}'.format(E))
