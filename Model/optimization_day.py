@@ -2,7 +2,7 @@
 Author: gwyxjtu
 Date: 2022-05-31 21:46:00
 LastEditors: yxs 572412425@qq.com
-LastEditTime: 2023-12-12 18:23:31
+LastEditTime: 2023-12-16 22:44:02
 FilePath: \设备能效计算\mx\optimization-MPC\Model\optimization_day.py
 Description: 人一生会遇到约2920万人,两个人相爱的概率是0.000049,所以你不爱我,我不怪你.
 
@@ -283,6 +283,9 @@ def OptimizationDay(parameter_json,load_json,begin_time,time_scale,storage_begin
         m.addConstr(z_a[i]*g_ht[i]>=0)
         m.addConstr(g_ht[i]+z_b[i]*g_eb[i]+z_c[i]*g_fc[i]+z_d[i]*g_hp[i]+z_e[i]*(g_fc[i]+g_hp[i])>=0)
         m.addConstr(z_a[i]+z_b[i]+z_c[i]+z_d[i]+z_e[i]==1)
+        #燃料电池不能给水箱蓄
+        m.addConstr(z_c[i]==0)
+        m.addConstr(z_e[i]==0)
 
         #给末端供热的约束
         m.addConstr(c*m_de*(t_de[i]-t_de_l[i]) == g_ht[i]*z_a[i]+g_eb[i]*(1-z_b[i])+g_fc[i]*(1-z_c[i]-z_e[i])+g_hp[i]*(1-z_d[i]-z_e[i])-g_load[i]-de_loss*(t_de_l[i]-43)*m_de)
