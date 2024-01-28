@@ -1,5 +1,5 @@
-# **约束方程**
-- 主要内容：罗列综合能源系统模型的所有约束方程。
+# **模型约束方程**
+- 主要内容：建立各设备简化后的数学模型，形成设备约束。整理能源系统模型的约束条件。
 
 ## **0. 约束方程目录**
 
@@ -14,11 +14,10 @@
 + [储冷罐](#储冷罐)
 + [光伏](#光伏)
 
-**2. 端点状态约束**
+**2. 末端状态约束**
 + [储热罐末端状态](#储热罐末端状态)
 + [储冷罐末端状态](#储冷罐末端状态)
 + [储氢罐末端状态](#储氢罐末端状态)
-+ [初始储能状态](#初始储能状态)
 
 **3. 能量平衡约束**
 + [电力供需平衡约束](#电力供需平衡约束)
@@ -31,41 +30,47 @@
 
 ### 1. 设备约束
 #### 燃料电池
+在氢氧环境下，燃料电池可同时提供电力与热力需求，本模型下燃料电池运行约束包括产电、产热以及边界约束：
 
 $$
-p^{fc}_t=\eta_p^{fc}*h^{fc}_t,\forall t,  \\
-g^{fc}_t=\theta^{ex}*\eta_g^{fc}*h^{fc}_t,\forall t, \\ p^{fc}_t \leq P^{fc} ,\forall t
+p^{fc}_t=\eta_p^{fc}*h^{fc}_t,\forall t  \\
+g^{fc}_t=\theta^{fc}*\eta_g^{fc}*h^{fc}_t, \forall t \\ 0 \le p^{fc}_t \le P^{fc} ,\forall t
 $$
 
-其中$p^{fc}_t，g^{fc}_t，h^{fc}_t$分别是燃料电池$t$时刻发电量，产热量，耗氢量,$P^{fc}$为设备某一时刻的最大发电量。
+其中$p^{fc}_t，g^{fc}_t，h^{fc}_t$分别是燃料电池$t$时刻发电量、产热量、耗氢量，$\eta_p^{fc}$为燃料电池产电效率系数，$\eta_g^{fc}$为燃料电池产热效率系数，$\theta^{fc}$为热回收系数,$P^{fc}$为设备任一时刻的最大发电量。
 
 #### 电解槽
+电解槽产生的氢气可以描述为：
 
 $$
-h^{el}_t=\beta^{el}*p^{fc}_t,\forall t,  \\
-p^{el}_t \leq P^{el} ,\forall t
+h^{el}_t=\beta^{el}*p^{el}_t,\forall t  \\
+0\le p^{el}_t \le P^{el} ,\forall t
 $$
 
-其中$p^{el}_t，h^{el}_t$分别是电解槽$t$时刻用电量，产氢量。
+其中$p^{el}_t，h^{el}_t$分别是电解槽$t$时刻用电量，产氢量，$\beta^{el}$为电解槽产氢效率系数。
 
 #### 储氢罐
+相邻两时刻的储氢罐储氢量之差与用氢产氢应保持平衡关系。同时，储氢罐的储氢量应维持在最小最大储氢量之间；储氢罐的充放也应满足充放限制：
 
 $$
-h^{sto}_{t} - h^{sto}_{t-1}=h^{el}_t+h^{pur}_t-h^{fc}_t,\forall t,  \\
+h^{sto}_{t} - h^{sto}_{t-1}=h^{el}_t+h^{pur}_t-h^{fc}_t,\forall t  \\
+h^{sto}_{min}\le h^{sto}_{t}\le h^{sto}_{max},\forall t \\
+-H^{trans}_{max}\le h^{sto}_{t} - h^{sto}_{t-1}\le H^{trans}_{max}
 $$
 
-其中$h^{sto}_{t},h^{pur}_{t}$分别是储氢罐$t$时刻用电量，购氢量。
+其中$h^{sto}_{t},h^{pur}_{t}$分别是储氢罐$t$时刻用电量，购氢量。$h^{sto}_{min},h^{sto}_{max}$分别为最小最大储氢量。$H^{trans}_{max}$为最大充放氢限制。
 
 #### 电锅炉
+为了满足部分的热量需求，电锅炉可以通过用电来产生热量。EB产生的热功率与最大热功率限制可用下述等式来描述：
 
 $$
 g^{eb}_{t}=\beta^{eb}*p^{eb}_t,\forall t,  \\
-p^{eb}_t \leq P^{eb} ,\forall t
+0\le p^{eb}_t \le P^{eb} ,\forall t
 $$
 
-其中$p^{eb}_t，g^{el}_t$分别是电锅炉$t$时刻用电量，产热量。
+其中$p^{eb}_t，g^{el}_t$分别是电锅炉$t$时刻用电量、产热量，$\beta^{eb}$为电锅炉效率系数。
 
-#### 地源热泵（未用）
+#### 地源热泵
 
 $$
 g^{ghp}_{t}=\beta^{ghpg}*p^{ghp,g}_{t},\forall t,  \\
@@ -76,34 +81,38 @@ $$
 
 其中$g^{ghp}_{t}，q^{ghp}_{t}，p^{ghp}_{t}$分别是地源热泵$t$时刻产热量，制冷量，用电量。$p^{ghp,g}_{t},p^{ghp,q}_{t}$分别是地源热泵用于制热和制冷的耗电量。
 
-#### 空气源热泵（未用）
+#### 空气源热泵
+热泵是一种将低品位热能转化为高品位热能的装置。能源转换效率高，功耗低，具有冬热、夏冷双重功能。从能量的角度来看，热泵的输出模型如下：
 
 $$
-g^{hp}_{t}=\beta^{hpg}*p^{hp,g}_{t},\forall t,  \\
-q^{hp}_{t}=\beta^{hpq}*p^{hp,q}_{t},\forall t,  \\
-p^{hp}_{t}=p^{hp,g}_{t}+p^{hp,q}_{t},\forall t,  \\
-p^{hp}_t \leq P^{hp} ,\forall t
+g_t^{hp}=p_t^{hp}*COP_{hp\_g}*T_{hp},\forall t \\
+q_t^{hp}=p_t^{hp}*COP_{hp\_q}*(1-T_{hp}),\forall t \\
+0 \le p^{hp}_t \le P^{hp} ,\forall t
 $$
 
-其中$g^{hp}_{t}，q^{hp}_{t}，p^{hp}_{t}$分别是空气源热泵$t$时刻产热量，制冷量，用电量。$p^{hp,g}_{t},p^{hp,q}_{t}$分别是空气源热泵用于制热和制冷的耗电量。
+其中$g^{hp}_{t}，q^{hp}_{t}，p^{hp}_{t}$分别是空气源热泵$t$时刻产热量，制冷量，用电量。$COP_{hp\_g},COP_{hp\_q}$分别是空气源热泵制热和制冷的能效系数，$T_{hp}$为热泵运行状态，$P^{hp}$为热泵最大运行功率。
 
 #### 储热罐
+储热罐的运行约束包括换热量温度转换关系、储热量限制、以及换热量限制：
 
 $$
-g^{ht}_t = c*m^{ht}*(t^{ht}_{t+1}-t^{ht}_{t}),\forall t,  \\
-t^{ht,min}  \leq t^{ht}_t \leq t^{ht,max} ,\forall t
+g^{ht}_t = c*m^{ht}*(t^{ht}_{t+1}-t^{ht}_{t}),\forall t  \\
+t^{ht,min}  \leq t^{ht}_t \leq t^{ht,max} ,\forall t  \\
+-G_{max}^{ht}\le g^{ht}_t\le G_{max}^{ht}
 $$
 
-其中$t^{ht}_t，g^{ht}_t$分别是储热罐$t$时刻水温，换热量。
+其中$t^{ht}_t，g^{ht}_t$分别是储热罐$t$时刻水温，换热量。$t^{ht,min},t^{ht,max}$分别为储热罐的最小最大水温。$G_{max}^{ht}$为最大换热量。
 
 #### 储冷罐
+与储热罐类似，运行约束如下：
 
 $$
-q^{ht}_t = c*m^{ct}*(t^{ct}_{t+1}-t^{ct}_{t}),\forall t,  \\
-t^{ct,min}  \leq t^{ct}_t \leq t^{ct,max} ,\forall t
+q^{ct}_t = c*m^{ct}*(t^{ct}_{t+1}-t^{ct}_{t}),\forall t  \\
+t^{ct,min}  \leq t^{ct}_t \leq t^{ct,max} ,\forall t  \\
+-Q_{max}^{ct}\le q^{ct}_t\le Q_{max}^{ct}
 $$
 
-其中$t^{ct}_t，q^{ct}_t$分别是储冷罐$t$时刻水温，换热量。
+其中$t^{ct}_t，q^{ct}_t$分别是储冷罐$t$时刻水温，换冷量。$t^{ct,min},t^{ct,max}$分别为储冷罐的最小最大水温。$Q_{max}^{ht}$为最大换冷量。
 
 #### 光伏
 
@@ -187,17 +196,7 @@ $$
 h^{sto}_{start} * (1-sl_{hsto}) \le h^{sto}_{final} \le h^{sto}_{start} * (1+sl_{hsto})
 $$
 
-其中，$h^{sto}_{start}$, $h^{sto}_{final}$, $sl_{hsto}$ 分别为起始状态和末端状态储氢罐储存量，以及末端松弛尺度。
-
-#### 初始储能状态：
-
-$$
-t^{ht}_0 = t^{ht}_{start} \\
-t^{ct}_0 = t^{ct}_{start} \\
-h^{sto}_0 = h^{sto}_{start}
-$$
-
-其中，$t^{ht}_0$，$t^{ct}_0$，$h^{sto}_0$ 分别为储热、储冷、储氢罐的初始状态温度与储存量。
+其中，$h^{sto}_{start}$, $h^{sto}_{final}$, $sl_{hsto}$ 分别为起始状态和末端状态储氢罐温度，以及末端松弛尺度。
 
 ### 3. 能量平衡约束
 #### 电力供需平衡约束：
