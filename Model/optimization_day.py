@@ -1,9 +1,9 @@
 '''
 Author: gwyxjtu
 Date: 2022-05-31 21:46:00
-LastEditors: yxs 572412425@qq.com
-LastEditTime: 2023-12-16 22:44:02
-FilePath: \设备能效计算\mx\optimization-MPC\Model\optimization_day.py
+LastEditors: guo_MateBookPro 867718012@qq.com
+LastEditTime: 2024-02-21 15:30:04
+FilePath: /optimization/Model/optimization_day.py
 Description: 人一生会遇到约2920万人,两个人相爱的概率是0.000049,所以你不爱我,我不怪你.
 
 Copyright (c) 2022 by gwyxjtu 867718012@qq.com, All Rights Reserved. 
@@ -261,7 +261,7 @@ def OptimizationDay(parameter_json,load_json,begin_time,time_scale,storage_begin
     m.addConstrs(t_de[i] == t_de_l[i+1] for i in range(period-1))
     m.addConstrs(g_gtw[i] == g_gtw_l[i+1] for i in range(period-1))
 
-    m.addConstr(gp.quicksum(z_hp)<=period*17/24)
+    m.addConstr(gp.quicksum(z_hp)<=period*10/24)
     for i in range(period):
         # 能量平衡
         # m.addConstr(p_fc[i] + p_pur[i] + p_pv[i] == p_el[i] + p_eb[i] + p_hp[i]  + p_pump[i] + p_load[i])
@@ -364,7 +364,7 @@ def OptimizationDay(parameter_json,load_json,begin_time,time_scale,storage_begin
     m.setObjective(gp.quicksum(opex)+p_demand_price*p_demand_max/24/30*time_scale, GRB.MINIMIZE)
     # m.setObjective(gp.quicksum(opex), GRB.MINIMIZE)
     m.params.NonConvex = 2
-    m.params.MIPGap = 0.01
+    m.params.MIPGap = 0.05
     # m.params.TimeLimit=300
     m.Params.LogFile = "testlog.log"
 

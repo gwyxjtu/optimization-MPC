@@ -1,9 +1,9 @@
 '''
 Author: gwyxjtu
 Date: 2022-06-06 20:10:39
-LastEditors: yxs 572412425@qq.com
-LastEditTime: 2023-12-17 10:16:12
-FilePath: \设备能效计算\mx\optimization-MPC\optimization_24h.py
+LastEditors: guo_MateBookPro 867718012@qq.com
+LastEditTime: 2024-02-21 15:30:09
+FilePath: /optimization/optimization_24h.py
 Description: 人一生会遇到约2920万人,两个人相爱的概率是0.000049,所以你不爱我,我不怪你.
 
 Copyright (c) 2022 by gwyxjtu 867718012@qq.com, All Rights Reserved. 
@@ -61,7 +61,7 @@ if __name__ == '__main__':
     #         }
     # pd.DataFrame(g_load).to_csv('hh38.csv')
     _logging.info('start')
-    time_length=24*30
+    time_length=24*5
     try:
         with open("Config/config.json", "rb") as f:
             input_json = json.load(f)
@@ -70,17 +70,17 @@ if __name__ == '__main__':
         raise Exception
     # 读取输入excel
     try:
-        load = pd.read_excel('input_720/1216_fc不能蓄热/3840_2200/input_720h.xls')
+        load = pd.read_excel('input_720/1216_fc不能蓄热/2500_1600/input_720h.xls')
     except BaseException as E:
         _logging.error('读取input_720h的excel失败,错误原因为{}'.format(E))
         raise Exception
     try:
-        sto = pd.read_excel('input_720/1216_fc不能蓄热/3840_2200/input_now.xls')
+        sto = pd.read_excel('input_720/1216_fc不能蓄热/2500_1600/input_now.xls')
     except BaseException as E:
         _logging.error('读取input_now的excel失败,错误原因为{}'.format(E))
         raise Exception
     try:
-        sto_end = pd.read_excel('input_720/1216_fc不能蓄热/3840_2200/input_end.xls')
+        sto_end = pd.read_excel('input_720/1216_fc不能蓄热/2500_1600/input_end.xls')
 
     except BaseException as E:
         _logging.error('读取input_end的excel失败,错误原因为{}'.format(E))
@@ -98,7 +98,7 @@ if __name__ == '__main__':
     
     # 写入输出Excel
     try:
-        to_csv(dict_control,"1216_fc不能蓄热/3840_2200/ht300_hydrogen1792_de150_eb82_ghp95")
+        to_csv(dict_control,"0221热泵测算/ht300_hydrogen1792_de150_eb82_ghp95")
         # to_csv(dict_plot,"dict_opt_plot_24h")
     except BaseException as E:
         _logging.error('excel输出失败,错误原因为{}'.format(E))
