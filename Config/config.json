@@ -23,7 +23,7 @@
             },
         "fc":
             {
-                "power_max":600,
+                "power_max":800,
 
                 "eta_fc_p":14.15,
                 "eta_fc_g":18.85,
@@ -47,7 +47,7 @@
             },
         "el":
             {
-                "power_max":55,
+                "power_max":500,
                 "beta_el":0.0182
             },
         "hst":
@@ -70,7 +70,7 @@
             },   
         "eb":
             {
-                "power_max":2800,
+                "power_max":3000,
                 "beta_eb":0.82,
                 "comment":"electric boiler"
             },  
@@ -83,6 +83,7 @@
         "ht":
             {
                 "water_max":300,
+                "energy":5000,
                 "t_max":55,
                 "t_min":45,
                 "t_wetbulb":20,
@@ -104,10 +105,10 @@
             },
         "hp":
             {
-                "power_max":500,
+                "power_max":300,
 
                 "beta_hpg":3.54,
-                "beta_hpq":4,
+                "beta_hpq":6,
                 "comment":"ground source heat pump,季节储热只能用cop了"
             },
 
@@ -136,7 +137,7 @@
 
         "pv":
             {
-                "area_max":10000,
+                "power_max":5000,
 
                 "beta_pv":0.21
             },

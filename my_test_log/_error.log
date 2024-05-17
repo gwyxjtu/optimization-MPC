@@ -5,3 +5,6 @@
 [2023-09-08 14:34:02] [error] [d:/Seafile/私人资料库/sf_2023/产学研/Code/optimization/optimization_24h.py - 81 - <module>] 优化主函数执行失败，错误原因为
 [2023-09-08 16:06:32] [error] [d:/Seafile/私人资料库/sf_2023/产学研/Code/optimization/optimization_24h.py - 91 - <module>] excel输出失败,错误原因为[Errno 13] Permission denied: 'Output/dict_opt_plot_24h.xls'
 [2023-11-08 14:27:25] [error] [e:\作业\研究生\氢组\榆林能源站\设备能效计算\mx\optimization-MPC\optimization_24h.py - 67 - <module>] 读取input_24h的excel失败,错误原因为[Errno 2] No such file or directory: 'Input/input_720h.xls'
+[2024-04-25 13:23:00] [error] [e:\seafile\Seafile\guo_file\sf_paper\技术类文章\optimization-MPC\optimization_24h.py - 104 - <module>] excel输出失败,错误原因为[Errno 2] No such file or directory: 'Output/Temp/dict_opt_plot_24h.xls'
+[2024-04-25 13:26:08] [error] [e:\seafile\Seafile\guo_file\sf_paper\技术类文章\optimization-MPC\Model\optimization_day.py - 191 - OptimizationDay] 读取负荷文件中电冷热光参数失败,错误原因为cannot access local variable 'period' where it is not associated with a value
+[2024-04-25 14:07:44] [error] [e:\seafile\Seafile\guo_file\sf_paper\技术类文章\optimization-MPC\optimization_24h.py - 104 - <module>] excel输出失败,错误原因为[Errno 13] Permission denied: 'Output/dict_opt_plot.xls'

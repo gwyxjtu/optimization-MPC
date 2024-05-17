@@ -1,9 +1,9 @@
 '''
 Author: gwyxjtu
 Date: 2022-06-06 20:10:39
-LastEditors: guo_MateBookPro 867718012@qq.com
-LastEditTime: 2024-02-21 15:30:09
-FilePath: /optimization/optimization_24h.py
+LastEditors: guo-4060ti 867718012@qq.com
+LastEditTime: 2024-04-25 14:08:01
+FilePath: \optimization-MPC\optimization_24h.py
 Description: 人一生会遇到约2920万人,两个人相爱的概率是0.000049,所以你不爱我,我不怪你.
 
 Copyright (c) 2022 by gwyxjtu 867718012@qq.com, All Rights Reserved. 
@@ -97,9 +97,5 @@ if __name__ == '__main__':
     #print(dict_plot)
     
     # 写入输出Excel
-    try:
-        to_csv(dict_control,"0221热泵测算/ht300_hydrogen1792_de150_eb82_ghp95")
+    to_csv(dict_control,"dict_opt_plot")
         # to_csv(dict_plot,"dict_opt_plot_24h")
-    except BaseException as E:
-        _logging.error('excel输出失败,错误原因为{}'.format(E))
-        raise Exception
