@@ -5,3 +5,29 @@
 [2023-09-08 14:34:02] [error] [d:/Seafile/私人资料库/sf_2023/产学研/Code/optimization/optimization_24h.py - 81 - <module>] 优化主函数执行失败，错误原因为
 [2023-09-08 16:06:32] [error] [d:/Seafile/私人资料库/sf_2023/产学研/Code/optimization/optimization_24h.py - 91 - <module>] excel输出失败,错误原因为[Errno 13] Permission denied: 'Output/dict_opt_plot_24h.xls'
 [2023-11-08 14:27:25] [error] [e:\作业\研究生\氢组\榆林能源站\设备能效计算\mx\optimization-MPC\optimization_24h.py - 67 - <module>] 读取input_24h的excel失败,错误原因为[Errno 2] No such file or directory: 'Input/input_720h.xls'
+[2023-11-08 16:42:30] [error] [e:\作业\研究生\氢组\榆林能源站\设备能效计算\mx\optimization-MPC\Model\optimization_day.py - 154 - OptimizationDay] 读取储能容量初始值和最终值失败,错误原因为't_de'
+[2023-11-08 16:42:30] [error] [e:\作业\研究生\氢组\榆林能源站\设备能效计算\mx\optimization-MPC\optimization_24h.py - 86 - <module>] 优化主函数执行失败，错误原因为
+[2023-11-08 16:44:22] [error] [e:\作业\研究生\氢组\榆林能源站\设备能效计算\mx\optimization-MPC\optimization_24h.py - 86 - <module>] 优化主函数执行失败，错误原因为object of type 'int' has no len()
+[2023-11-08 16:45:02] [error] [e:\作业\研究生\氢组\榆林能源站\设备能效计算\mx\optimization-MPC\optimization_24h.py - 86 - <module>] 优化主函数执行失败，错误原因为Unable to write to file 'data_optimize/优化控制/Temp/model.ilp'
+[2023-11-08 16:54:39] [error] [e:\作业\研究生\氢组\榆林能源站\设备能效计算\mx\optimization-MPC\optimization_24h.py - 86 - <module>] 优化主函数执行失败，错误原因为Unable to write to file 'data_optimize/优化控制/Temp/model.ilp'
+[2023-11-08 17:08:58] [error] [e:\作业\研究生\氢组\榆林能源站\设备能效计算\mx\optimization-MPC\optimization_24h.py - 86 - <module>] 优化主函数执行失败，错误原因为Unable to write to file 'data_optimize/优化控制/Temp/model.ilp'
+[2023-11-08 17:09:11] [error] [e:\作业\研究生\氢组\榆林能源站\设备能效计算\mx\optimization-MPC\optimization_24h.py - 86 - <module>] 优化主函数执行失败，错误原因为Unable to write to file 'data_optimize/优化控制/Temp/model.ilp'
+[2023-11-08 17:10:29] [error] [e:\作业\研究生\氢组\榆林能源站\设备能效计算\mx\optimization-MPC\optimization_24h.py - 86 - <module>] 优化主函数执行失败，错误原因为0
+[2023-11-08 17:12:54] [error] [e:\作业\研究生\氢组\榆林能源站\设备能效计算\mx\optimization-MPC\optimization_24h.py - 86 - <module>] 优化主函数执行失败，错误原因为0
+[2023-11-08 17:15:24] [error] [e:\作业\研究生\氢组\榆林能源站\设备能效计算\mx\optimization-MPC\optimization_24h.py - 86 - <module>] 优化主函数执行失败，错误原因为0
+[2023-11-08 17:15:49] [error] [e:\作业\研究生\氢组\榆林能源站\设备能效计算\mx\optimization-MPC\optimization_24h.py - 86 - <module>] 优化主函数执行失败，错误原因为0
+[2023-11-08 17:19:26] [error] [e:\作业\研究生\氢组\榆林能源站\设备能效计算\mx\optimization-MPC\Model\optimization_day.py - 341 - OptimizationDay] Quadratic equality constraints are non-convex. Set NonConvex parameter to 2 to solve model.
+[2023-11-08 17:19:26] [error] [e:\作业\研究生\氢组\榆林能源站\设备能效计算\mx\optimization-MPC\optimization_24h.py - 86 - <module>] 优化主函数执行失败，错误原因为Unable to retrieve attribute 'x'
+[2023-11-08 17:33:27] [error] [e:\作业\研究生\氢组\榆林能源站\设备能效计算\mx\optimization-MPC\optimization_24h.py - 86 - <module>] 优化主函数执行失败，错误原因为'float' object has no attribute 'x'
+[2023-11-08 19:59:38] [error] [e:\作业\研究生\氢组\榆林能源站\设备能效计算\mx\optimization-MPC\optimization_24h.py - 96 - <module>] excel输出失败,错误原因为[Errno 2] No such file or directory: 'Output/input720/dict_opt_control_720h.xls'
+[2023-11-08 20:16:00] [error] [e:\作业\研究生\氢组\榆林能源站\设备能效计算\mx\optimization-MPC\optimization_24h.py - 86 - <module>] 优化主函数执行失败，错误原因为Constant is Nan
+[2023-11-08 20:23:43] [error] [e:\作业\研究生\氢组\榆林能源站\设备能效计算\mx\optimization-MPC\optimization_24h.py - 86 - <module>] 优化主函数执行失败，错误原因为Constant is Nan
+[2023-11-08 20:24:19] [error] [e:\作业\研究生\氢组\榆林能源站\设备能效计算\mx\optimization-MPC\optimization_24h.py - 86 - <module>] 优化主函数执行失败，错误原因为Constant is Nan
+[2023-11-08 20:32:50] [error] [e:\作业\研究生\氢组\榆林能源站\设备能效计算\mx\optimization-MPC\Model\optimization_day.py - 346 - OptimizationDay] Out of memory
+[2023-11-08 20:41:31] [error] [e:\作业\研究生\氢组\榆林能源站\设备能效计算\mx\optimization-MPC\Model\optimization_day.py - 346 - OptimizationDay] Out of memory
+[2023-11-08 20:47:25] [error] [e:\作业\研究生\氢组\榆林能源站\设备能效计算\mx\optimization-MPC\Model\optimization_day.py - 346 - OptimizationDay] Out of memory
+[2023-11-08 20:51:39] [error] [e:\作业\研究生\氢组\榆林能源站\设备能效计算\mx\optimization-MPC\optimization_24h.py - 96 - <module>] excel输出失败,错误原因为[Errno 2] No such file or directory: 'Output/input720/dict_opt_control_720h_45.xls'
+[2023-11-08 21:11:15] [error] [e:\作业\研究生\氢组\榆林能源站\设备能效计算\mx\optimization-MPC\optimization_24h.py - 96 - <module>] excel输出失败,错误原因为float() argument must be a string or a number, not 'Var'
+[2023-11-08 22:25:26] [error] [e:\作业\研究生\氢组\榆林能源站\设备能效计算\mx\optimization-MPC\optimization_24h.py - 67 - <module>] 读取input_720h的excel失败,错误原因为[Errno 2] No such file or directory: 'input_720/input_720h.xls'
+[2023-11-09 16:41:56] [error] [e:\作业\研究生\氢组\榆林能源站\设备能效计算\mx\optimization-MPC\optimization_24h.py - 72 - <module>] 读取input_now的excel失败,错误原因为[Errno 2] No such file or directory: 'input_720/1109/ht45/input_now_ht19.xls'
+[2023-11-25 11:10:36] [error] [e:\作业\研究生\氢组\榆林能源站\设备能效计算\mx\optimization-MPC\optimization_24h.py - 67 - <module>] 读取input_720h的excel失败,错误原因为[Errno 2] No such file or directory: 'input_720/1122/cold3200/input_720h.xls'

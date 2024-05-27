@@ -3,8 +3,37 @@
 Minimize
  
 Subject To
- R1: t_ht23 = 0
- R629: t_ht23 >= 4
+ R0: t_ht_l0 = 45
+ R1: t_de_l0 = 45
+ R2: g_gtw_l0 = 0
+ R5044: t_de0 >= 47
+ R5046: p_fc0 <= 600
+ R5047: p_eb0 <= 2800
+ R5048: p_fc0 - 12.0275 h_fc0 = 0
+ R5049: g_fc0 - 16.0225 h_fc0 = 0
+ R5050: cop_hp0 - 0.1209 t_gtw_out0 = 2
+ R5053: 0.88 t_gtw_out0 - 0.88 t_b0 = 0
+ R5054: - 1.3476552126970363e-04 g_gtw_l0 + 1.3476552126970363e-04 g_gtw0
+   + t_b0 = 9.5
+ R5056: - 0.82 p_eb0 + g_eb0 = 0
+ qc0: 175 t_de0 - 152.5 t_de_l0 - g_fc0 - g_hp0 - g_eb0 + [ - z_a0 * g_ht0
+   + z_b0 * g_eb0 + z_c0 * g_fc0 + z_d0 * g_hp0 + z_e0 * g_fc0
+   + z_e0 * g_hp0 ] = -2732.5
+ qc1: g_hp0 + [ - 300 z_e0 * cop_hp0 ] = 0
+ qc2: g_ht0 + [ - 175 t_ht_l0 * z_ht_de0 + 175 t_de_l0 * z_ht_de0 ] <= 0
 Bounds
- t_ht23 free
+ t_ht_l0 free
+ g_ht0 free
+ t_de0 free
+ t_de_l0 free
+ g_fc0 free
+ h_fc0 free
+ g_hp0 free
+ t_gtw_out0 free
+ g_gtw_l0 free
+ t_b0 free
+ p_eb0 free
+ g_eb0 free
+Binaries
+ z_a0 z_b0 z_c0 z_d0 z_e0 z_ht_de0 z_e0
 End
