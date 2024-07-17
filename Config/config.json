@@ -25,9 +25,9 @@
             {
                 "power_max":600,
 
-                "eta_fc_p":14.15,
-                "eta_fc_g":18.85,
-                "theta_ex":0.85,
+                "k_fc_p":12.0275,
+                "k_fc_g":16.0225,
+                "theta_ex":1,
                 "power_200":
                 {
                     "g_p_ratio":1,
@@ -71,7 +71,7 @@
         "eb":
             {
                 "power_max":2800,
-                "beta_eb":0.82,
+                "k_eb":0.82,
                 "comment":"electric boiler"
             },  
         "ec":
@@ -97,18 +97,10 @@
         "ghp":
             {
                 "power_max":300,
-
+                "max_count_day":16,
                 "beta_ghpg":3.54,
                 "beta_ghpq":4,
                 "comment":"ground source heat pump"
-            },
-        "hp":
-            {
-                "power_max":500,
-
-                "beta_hpg":3.54,
-                "beta_hpq":4,
-                "comment":"ground source heat pump,季节储热只能用cop了"
             },
 
         "gtw":
@@ -117,7 +109,7 @@
                 "cost":30000,
                 "crf":30,
                 "water_max":240,
-                "t_in_min":4,
+                "t_in_min":3,
                 "beta_gtw":7,
                 "comment":"ground thermal well"
             },
@@ -148,8 +140,13 @@
                 "miu_loss":0.15,
                 "temperature_difference":5,
                 "comment":"供暖管道"
-            }
-
+            },
+        "battery":
+        {
+            "capacity_max":200,
+            "k_b":0.95,
+            "comment":"电池"
+        }
 
     }
 }

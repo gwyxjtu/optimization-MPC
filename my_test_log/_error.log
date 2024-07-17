@@ -31,3 +31,10 @@
 [2023-11-08 22:25:26] [error] [e:\作业\研究生\氢组\榆林能源站\设备能效计算\mx\optimization-MPC\optimization_24h.py - 67 - <module>] 读取input_720h的excel失败,错误原因为[Errno 2] No such file or directory: 'input_720/input_720h.xls'
 [2023-11-09 16:41:56] [error] [e:\作业\研究生\氢组\榆林能源站\设备能效计算\mx\optimization-MPC\optimization_24h.py - 72 - <module>] 读取input_now的excel失败,错误原因为[Errno 2] No such file or directory: 'input_720/1109/ht45/input_now_ht19.xls'
 [2023-11-25 11:10:36] [error] [e:\作业\研究生\氢组\榆林能源站\设备能效计算\mx\optimization-MPC\optimization_24h.py - 67 - <module>] 读取input_720h的excel失败,错误原因为[Errno 2] No such file or directory: 'input_720/1122/cold3200/input_720h.xls'
+[2024-06-04 10:08:16] [error] [e:\作业\研究生\氢组\榆林能源站\设备能效计算\mx\optimization-MPC\Model\optimization_day.py - 140 - OptimizationDay] 读取config.json中价格参数失败,错误原因为'int' object is not subscriptable
+[2024-06-04 11:58:49] [error] [e:\作业\研究生\氢组\榆林能源站\设备能效计算\mx\optimization-MPC\Model\optimization_day.py - 170 - OptimizationDay] 读取储能容量初始值和最终值失败,错误原因为5
+[2024-06-04 12:01:20] [error] [e:\作业\研究生\氢组\榆林能源站\设备能效计算\mx\optimization-MPC\Model\optimization_day.py - 170 - OptimizationDay] 读取储能容量初始值和最终值失败,错误原因为5
+[2024-06-04 13:22:01] [error] [e:\作业\研究生\氢组\榆林能源站\设备能效计算\mx\optimization-MPC\optimization_24h.py - 110 - <module>] excel输出失败,错误原因为[Errno 13] Permission denied: 'Output/1216_fc不能蓄热/1800_1200/ht300_hydrogen1792_de150_eb82_ghp95_test30_nozppi0.xls'
+[2024-06-05 14:10:32] [error] [e:\作业\研究生\氢组\榆林能源站\设备能效计算\mx\optimization-MPC\Model\optimization_day.py - 172 - OptimizationDay] 读取储能容量初始值和最终值失败,错误原因为'soc_b'
+[2024-06-05 14:11:45] [error] [e:\作业\研究生\氢组\榆林能源站\设备能效计算\mx\optimization-MPC\optimization_24h.py - 133 - <module>] excel输出失败,错误原因为float() argument must be a string or a real number, not 'Var'
+[2024-06-05 20:31:20] [error] [e:\作业\研究生\氢组\榆林能源站\设备能效计算\mx\optimization-MPC\Model\optimization_day.py - 173 - OptimizationDay] 读取储能容量初始值和最终值失败,错误原因为'ghp_has_open'
