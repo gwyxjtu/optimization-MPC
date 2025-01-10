@@ -50,29 +50,51 @@ import pandas as pd
 from cpeslog.log_code import _logging
 from Model.optimization_day import OptimizationDay,to_csv
 
-
+#更新i时刻的实时数据
 def update_i_load_and_eff(event_table,load,input_json,sto,l):
+    #负荷
     load.loc[event_table.at[l,'i'],'g_load']=event_table.at[l,'g_load']
     load.loc[event_table.at[l,'i'],'p_load']=event_table.at[l,'p_load']
     load.loc[event_table.at[l,'i'],'pv_generation']=event_table.at[l,'p_pv']
-    input_json['device']['fc']['k_fc_p']=event_table.at[l,'k_fc_p']
-    input_json['device']['fc']['k_fc_g']=event_table.at[l,'k_fc_g']
-    input_json['device']['eb']['k_eb']=event_table.at[l,'k_eb']
-    input_json['device']['battery']['k_b']=event_table.at[l,'k_b']
-    sto.loc[event_table.at[l,'i'],'t_ht']=event_table.at[l,'t_ht_l']
+    #设备效率
+    input_json['device']['fc']['k_fc_p'][event_table.at[l,'i']]=event_table.at[l,'k_fc_p']
+    input_json['device']['fc']['k_fc_g'][event_table.at[l,'i']]=event_table.at[l,'k_fc_g']
+    input_json['device']['eb']['k_eb'][event_table.at[l,'i']]=event_table.at[l,'k_eb']
+    input_json['device']['battery']['k_b'][event_table.at[l,'i']]=event_table.at[l,'k_b']
+    #初始状态
+    sto.loc[event_table.at[l,'i'],'t_ht']=event_table.at[l,'t_ht_l'] #这里要的是l时刻的初始状态，也就是l-1时刻末状态
     sto.loc[event_table.at[l,'i'],'t_de']=event_table.at[l,'t_de_l']
     sto.loc[event_table.at[l,'i'],'soc_b']=event_table.at[l,'soc_b_l']
     sto.loc[event_table.at[l,'i'],'ghp_has_open']=event_table.at[l,'ghp_has_open']
 
+#计算状态量，start：当前时刻。event_table：事件触发表。其余参数为优化得到的结果：功率，右端向量，上下限。。。
+def calculate_storage_state(start,event_table,judge_dict2,dict_control2):
+    #计算状态量，根据上一时刻的状态和充放功率计算储能状态，因为没有实际的事件触发的数据，只能通过这种方式得到触发时的初始状态。
+    for ll in range(start+1,len(event_table)):
+        last_index=event_table.at[ll-1,'i']-judge_dict2['begin_time']#上一时刻
+        time_diff=event_table.at[ll,'i']-event_table.at[ll-1,'i']+event_table.at[ll,'time']-event_table.at[ll-1,'time']#时间差
+
+        event_table.loc[ll,'soc_b_l']=event_table.loc[ll-1,'soc_b_l']-dict_control2['p_b'][last_index]*(time_diff)*judge_dict2['k_b'][last_index] if dict_control2['p_b'][last_index]<=0 else event_table.loc[ll-1,'soc_b_l']-dict_control2['p_b'][last_index]*(time_diff)/judge_dict2['k_b'][last_index]
+        event_table.loc[ll,'t_ht_l']=event_table.loc[ll-1,'t_ht_l']-dict_control2['g_ht'][last_index]*(time_diff)/(4200/3.6/1000)/input_json['device']['ht']['water_max']- input_json['device']['ht']['miu_loss']*(judge_dict2['t_ht_l'][last_index]-load['ambient_temperature'][event_table.at[ll-1,'i']])*(time_diff)/(4200/3.6/1000)
+        event_table.loc[ll,'t_de_l']=event_table.loc[ll-1,'t_de_l']+(dict_control2['g_ht'][last_index]+dict_control2['g_eb'][last_index]+dict_control2['g_hp'][last_index]+dict_control2['g_fc'][last_index]-dict_control2['g_load'][last_index])*(time_diff)/(4200/3.6/1000)/input_json['device']['de']['water_max']-input_json['device']['de']['miu_loss']*(dict_control2['t_de_l'][last_index]-43)*(time_diff)/(4200/3.6/1000)
+        event_table.loc[ll,'ghp_has_open']=event_table.loc[ll-1,'ghp_has_open']+z_file2['z_hp'][last_index]*(time_diff)
+#保存结果，start：当前时刻。event_table：事件触发表。其余参数为优化得到的结果：功率，右端向量，上下限。。。
+def store_result(start,event_table,judge_dict2,dict_control2,var_SALBUB2,constraint_SARHS2):    
+    #将优化结果汇总至resultss，因为dict_control2中没有非整点的储能状态，所以写入的时候event_table放最后，这样重复的列可以直接覆盖，只保留最新的
+    for ll in range(start,len(event_table)):
+        for k in dict_control2.keys():
+            resultss.loc[ll,k]=dict_control2[k][event_table.at[ll,'i']-judge_dict2['begin_time']]
+        for k in var_SALBUB2.keys():
+            resultss.loc[ll,k]=var_SALBUB2[k][event_table.at[ll,'i']-judge_dict2['begin_time']]
+        for k in constraint_SARHS2.keys():
+            resultss.loc[ll,k]=constraint_SARHS2[k][event_table.at[ll,'i']-judge_dict2['begin_time']]
+        for k in event_table.columns[2:]:
+            resultss.loc[ll,k]=event_table.loc[ll,k]
+
+
+
 if __name__ == '__main__':
 
-
-    # g_load={'g_load_18':([3800]*11+[2200]*7+[3800]*6)*60,
-    # #         'g_load_26':([2500]*11+[1600]*7+[2500]*6)*60,
-    #         # 'g_load_32':([3200]*11+[2000]*7+[3200]*6)*60
-    
-    #         }
-    # pd.DataFrame(g_load).to_csv('hh38.csv')
     _logging.info('start')
     time_end=24
 
@@ -95,13 +117,14 @@ if __name__ == '__main__':
         raise Exception
     try:
         sto_end = pd.read_excel('input_720/cacET/input_end.xls')
-
     except BaseException as E:
         _logging.error('读取input_end的excel失败,错误原因为{}'.format(E))
         raise Exception
-    
-    # event_table=pd.read_excel('')
-
+    try:
+        event_table=pd.read_excel('input_720/cacET/event-triggered.xlsx')
+    except BaseException as E:
+        _logging.error('读取event_table的excel失败,错误原因为{}'.format(E))
+        raise Exception
 
     sto_end['time']=time_end
     sto_end.index = [time_end]
@@ -110,129 +133,86 @@ if __name__ == '__main__':
     dict_control,z_file,model_SAObj,var_SALBUB,constraint_SARHS,judge_dict = OptimizationDay(parameter_json=input_json, load_json=load, begin_time = 0, time_scale=time_end, storage_begin_json=sto, storage_end_json=sto_end,model_type='MIP',z_file={})
     dict_control2,z_file2,model_SAObj2,var_SALBUB2,constraint_SARHS2,judge_dict2 = OptimizationDay(parameter_json=input_json, load_json=load, begin_time = 0, time_scale=time_end, storage_begin_json=sto, storage_end_json=sto_end,model_type='LP',z_file=z_file)
     
-    # to_csv(dict_control,"cacET/ht300_hydrogen1792_de150_eb82_ghp95_test30_nozppi0mipbb")
     to_csv(dict_control2,"cacET/day_ahead_scheduling")
     to_csv(var_SALBUB2,"cacET/day_ahead_scheduling_varUBLB")
-    # to_csv(model_SAObj2,"1216_fc不能蓄热/1800_1200/ht300_hydrogen1792_de150_eb82_ghp95_test_")
     to_csv(constraint_SARHS2,"cacET/day_ahead_scheduling_RHSUBLB")
 
-    event_table=pd.read_excel('input_720/cacET/event-triggered.xlsx')
+    #resulitss用来存结果，每循环一次都将结果保存，将所有列加入resultss，重复列加个“__z”后缀再去重
     resultss=copy.deepcopy(event_table)
     resultss=resultss.join(pd.DataFrame(dict_control2),rsuffix='__z')
     resultss=resultss.join(pd.DataFrame(var_SALBUB2),rsuffix='___z')
     resultss=resultss.join(pd.DataFrame(constraint_SARHS2),rsuffix='____z')
     resultss.drop(resultss.loc[:,resultss.columns.str.endswith('__z')].columns,axis=1,inplace=True)
     resultss['etm']=[0 for _ in range(len(resultss))]
-    for ll in range(1,len(event_table)):
-        event_table.loc[ll,'soc_b_l']=event_table.loc[ll-1,'soc_b_l']-dict_control2['p_b'][event_table.at[ll-1,'i']-judge_dict2['begin_time']]*(event_table.at[ll,'i']-event_table.at[ll-1,'i']+event_table.at[ll,'time']-event_table.at[ll-1,'time'])*judge_dict2['k_b'][event_table.at[ll-1,'i']-judge_dict2['begin_time']] if dict_control2['p_b'][event_table.at[ll-1,'i']-judge_dict2['begin_time']]<=0 else event_table.loc[ll-1,'soc_b_l']-dict_control2['p_b'][event_table.at[ll-1,'i']-judge_dict2['begin_time']]*(event_table.at[ll,'i']-event_table.at[ll-1,'i']+event_table.at[ll,'time']-event_table.at[ll-1,'time'])/judge_dict2['k_b'][event_table.at[ll-1,'i']-judge_dict2['begin_time']]
-        # event_table.loc[ll,'soc_b_l']=dict_control2['soc_b_l'][event_table.at[ll,'i']-l]
-        event_table.loc[ll,'t_ht_l']=event_table.loc[ll-1,'t_ht_l']-dict_control2['g_ht'][event_table.at[ll-1,'i']-judge_dict2['begin_time']]*(event_table.at[ll,'i']-event_table.at[ll-1,'i']+event_table.at[ll,'time']-event_table.at[ll-1,'time'])/(4200/3.6/1000)/input_json['device']['ht']['water_max']- input_json['device']['ht']['miu_loss']*(judge_dict2['t_ht_l'][event_table.at[ll-1,'i']]-load['ambient_temperature'][event_table.at[ll-1,'i']])*(event_table.at[ll,'i']-event_table.at[ll-1,'i']+event_table.at[ll,'time']-event_table.at[ll-1,'time'])/(4200/3.6/1000)
-        event_table.loc[ll,'t_de_l']=event_table.loc[ll-1,'t_de_l']+(dict_control2['g_ht'][event_table.at[ll-1,'i']-judge_dict2['begin_time']]+dict_control2['g_eb'][event_table.at[ll-1,'i']-judge_dict2['begin_time']]+dict_control2['g_hp'][event_table.at[ll-1,'i']-judge_dict2['begin_time']]+dict_control2['g_fc'][event_table.at[ll-1,'i']-judge_dict2['begin_time']]-dict_control2['g_load'][event_table.at[ll-1,'i']-judge_dict2['begin_time']])*(event_table.at[ll,'i']-event_table.at[ll-1,'i']+event_table.at[ll,'time']-event_table.at[ll-1,'time'])/(4200/3.6/1000)/input_json['device']['de']['water_max']-input_json['device']['de']['miu_loss']*(dict_control2['t_de_l'][event_table.at[ll-1,'i']-judge_dict2['begin_time']]-43)*(event_table.at[ll,'i']-event_table.at[ll-1,'i']+event_table.at[ll,'time']-event_table.at[ll-1,'time'])/(4200/3.6/1000)
-        event_table.loc[ll,'ghp_has_open']=event_table.loc[ll-1,'ghp_has_open']+z_file2['z_hp'][event_table.at[ll-1,'i']-judge_dict2['begin_time']]*(event_table.at[ll,'i']-event_table.at[ll-1,'i']+event_table.at[ll,'time']-event_table.at[ll-1,'time'])
-    for ll in range(len(event_table)):
-        for k in dict_control2.keys():
-            resultss.loc[ll,k]=dict_control2[k][event_table.at[ll,'i']-judge_dict2['begin_time']]
-        for k in var_SALBUB2.keys():
-            resultss.loc[ll,k]=var_SALBUB2[k][event_table.at[ll,'i']-judge_dict2['begin_time']]
-        for k in constraint_SARHS2.keys():
-            resultss.loc[ll,k]=constraint_SARHS2[k][event_table.at[ll,'i']-judge_dict2['begin_time']]
-        for k in event_table.columns[2:]:
-            resultss.loc[ll,k]=event_table.loc[ll,k]
-    # event_triggered_s=event_table[:,:]
-    etm=0
-    for l in event_table.index:
-        for c in event_table.columns[2:]:
-            if  event_table.at[l,c]<=judge_dict2[c][(int)(event_table.at[l,'i'])-judge_dict2['begin_time']]+0.01 and event_table.at[l,c]>=judge_dict2[c][(int)(event_table.at[l,'i'])-judge_dict2['begin_time']]-0.01:
-                etm=etm
-            elif event_table.at[l,c]<=judge_dict2[c+'_UP'][(int)(event_table.at[l,'i'])-judge_dict2['begin_time']] and event_table.at[l,c]>=judge_dict2[c+'_LOW'][(int)(event_table.at[l,'i'])-judge_dict2['begin_time']]:
-                etm=1
-            else:
-                etm=2
-                break
-        if etm==1:
 
+    #计算状态量，根据上一时刻的状态和充放功率计算储能状态
+    calculate_storage_state(0,event_table,judge_dict2,dict_control2)
+    store_result(0,event_table,judge_dict2,dict_control2,var_SALBUB2,constraint_SARHS2)
+   
+    etm=0 #etm=0则结果直接用，etm=1线性规划灵敏度分析，etm=2重新解
+
+    for l in event_table.index:
+        #event_table的前两列为时间，因此从第三列开始循环，时间为便于计算采用10进制，如i=1，time=0.2表示1：12。
+        for c in event_table.columns[2:]:
+            #如果是储能，需要计算再比较，如8：20判断是否水箱温度触发，需先根据8：00的水箱温度和充放功率计算出8：20的温度，再和实际数据比较，电池和管道同理
+            if c in ['t_ht_l','t_de_l','soc_b_l']:
+                if event_table.at[l,'time']!=0:
+                    #非整点的储能需要计算，计算方法同calculate_storage_state
+                    last_index=event_table.at[l-1,'i']-judge_dict2['begin_time']#上一时刻
+                    time_diff=event_table.at[l,'i']-event_table.at[l-1,'i']+event_table.at[l,'time']-event_table.at[l-1,'time']#时间差
+                    if c=='t_ht_l':
+                        jd=event_table.loc[l-1,'t_ht_l']-dict_control2['g_ht'][last_index]*(time_diff)/(4200/3.6/1000)/input_json['device']['ht']['water_max']- input_json['device']['ht']['miu_loss']*(judge_dict2['t_ht_l'][last_index]-load['ambient_temperature'][event_table.at[l-1,'i']])*(time_diff)/(4200/3.6/1000)
+                    elif c=='t_de_l':
+                        jd=event_table.loc[l-1,'t_de_l']+(dict_control2['g_ht'][last_index]+dict_control2['g_eb'][last_index]+dict_control2['g_hp'][last_index]+dict_control2['g_fc'][last_index]-dict_control2['g_load'][last_index])*(time_diff)/(4200/3.6/1000)/input_json['device']['de']['water_max']-input_json['device']['de']['miu_loss']*(dict_control2['t_de_l'][last_index]-43)*(time_diff)/(4200/3.6/1000)
+                    elif c=='soc_b_l':
+                        jd=event_table.loc[l-1,'soc_b_l']-dict_control2['p_b'][last_index]*(time_diff)*judge_dict2['k_b'][last_index] if dict_control2['p_b'][last_index]<=0 else event_table.loc[l-1,'soc_b_l']-dict_control2['p_b'][last_index]*(time_diff)/judge_dict2['k_b'][last_index]
+
+                else:
+                    #整点的储能直接比较
+                    jd=judge_dict2[c][(int)(event_table.at[l,'i'])-judge_dict2['begin_time']]
+                if  event_table.at[l,c]<=jd+0.01 and event_table.at[l,c]>=jd-0.01:
+                    etm=etm
+                else:
+                    etm=2
+                    break
+            #如果是设备，判断上下限。ghp_has_open记录到当前时间为止今天开了多长时间热泵，单位小时
+            elif c != 'ghp_has_open':
+                if  event_table.at[l,c]<=judge_dict2[c][(int)(event_table.at[l,'i'])-judge_dict2['begin_time']]+0.01 and event_table.at[l,c]>=judge_dict2[c][(int)(event_table.at[l,'i'])-judge_dict2['begin_time']]-0.01:
+                    etm=etm
+                elif event_table.at[l,c]<=judge_dict2[c+'_UP'][(int)(event_table.at[l,'i'])-judge_dict2['begin_time']] and event_table.at[l,c]>=judge_dict2[c+'_LOW'][(int)(event_table.at[l,'i'])-judge_dict2['begin_time']]:
+                    etm=1
+                else:
+                    etm=2
+                    break
+
+        if etm==1:
             update_i_load_and_eff(event_table,load,input_json,sto,l)
+            #线性规划灵敏度分析比较麻烦，这里直接重解线性规划，和灵敏度分析效果一样，都是秒解
             dict_control2,z_file2,model_SAObj2,var_SALBUB2,constraint_SARHS2,judge_dict2 = OptimizationDay(parameter_json=input_json, load_json=load, begin_time = event_table.at[l,'i'], time_scale=time_end, storage_begin_json=sto, storage_end_json=sto_end,model_type='LP',z_file=z_file)
-            # for k in resultss.keys():
-            #     for ll in range(judge_dict2['begin_time'],time_end):
-            #         resultss[k][ll]=dict_control2[k][ll-judge_dict2['begin_time']]
-            for ll in range(l+1,len(event_table)):
-                event_table.loc[ll,'soc_b_l']=event_table.loc[ll-1,'soc_b_l']-dict_control2['p_b'][event_table.at[ll-1,'i']-judge_dict2['begin_time']]*(event_table.at[ll,'i']-event_table.at[ll-1,'i']+event_table.at[ll,'time']-event_table.at[ll-1,'time'])*judge_dict2['k_b'][event_table.at[ll-1,'i']-judge_dict2['begin_time']] if dict_control2['p_b'][event_table.at[ll-1,'i']-judge_dict2['begin_time']]<=0 else event_table.loc[ll-1,'soc_b_l']-dict_control2['p_b'][event_table.at[ll-1,'i']-judge_dict2['begin_time']]*(event_table.at[ll,'i']-event_table.at[ll-1,'i']+event_table.at[ll,'time']-event_table.at[ll-1,'time'])/judge_dict2['k_b'][event_table.at[ll-1,'i']-judge_dict2['begin_time']]
-                # event_table.loc[ll,'soc_b_l']=dict_control2['soc_b_l'][event_table.at[ll,'i']-l]
-                event_table.loc[ll,'t_ht_l']=event_table.loc[ll-1,'t_ht_l']-dict_control2['g_ht'][event_table.at[ll-1,'i']-judge_dict2['begin_time']]*(event_table.at[ll,'i']-event_table.at[ll-1,'i']+event_table.at[ll,'time']-event_table.at[ll-1,'time'])/(4200/3.6/1000)/input_json['device']['ht']['water_max']- input_json['device']['ht']['miu_loss']*(judge_dict2['t_ht_l'][event_table.at[ll-1,'i']-judge_dict2['begin_time']]-load['ambient_temperature'][event_table.at[ll-1,'i']])*(event_table.at[ll,'i']-event_table.at[ll-1,'i']+event_table.at[ll,'time']-event_table.at[ll-1,'time'])/(4200/3.6/1000)
-                event_table.loc[ll,'t_de_l']=event_table.loc[ll-1,'t_de_l']+(dict_control2['g_ht'][event_table.at[ll-1,'i']-judge_dict2['begin_time']]+dict_control2['g_eb'][event_table.at[ll-1,'i']-judge_dict2['begin_time']]+dict_control2['g_hp'][event_table.at[ll-1,'i']-judge_dict2['begin_time']]+dict_control2['g_fc'][event_table.at[ll-1,'i']-judge_dict2['begin_time']]-dict_control2['g_load'][event_table.at[ll-1,'i']-judge_dict2['begin_time']])*(event_table.at[ll,'i']-event_table.at[ll-1,'i']+event_table.at[ll,'time']-event_table.at[ll-1,'time'])/(4200/3.6/1000)/input_json['device']['de']['water_max']-input_json['device']['de']['miu_loss']*(dict_control2['t_de_l'][event_table.at[ll-1,'i']-judge_dict2['begin_time']]-43)*(event_table.at[ll,'i']-event_table.at[ll-1,'i']+event_table.at[ll,'time']-event_table.at[ll-1,'time'])/(4200/3.6/1000)
-                event_table.loc[ll,'ghp_has_open']=event_table.loc[ll-1,'ghp_has_open']+z_file2['z_hp'][event_table.at[ll-1,'i']-judge_dict2['begin_time']]*(event_table.at[ll,'i']-event_table.at[ll-1,'i']+event_table.at[ll,'time']-event_table.at[ll-1,'time'])
-            for ll in range(l,len(event_table)):
-                for k in dict_control2.keys():
-                    resultss.loc[ll,k]=dict_control2[k][event_table.at[ll,'i']-judge_dict2['begin_time']]
-                for k in var_SALBUB2.keys():
-                    resultss.loc[ll,k]=var_SALBUB2[k][event_table.at[ll,'i']-judge_dict2['begin_time']]
-                for k in constraint_SARHS2.keys():
-                    resultss.loc[ll,k]=constraint_SARHS2[k][event_table.at[ll,'i']-judge_dict2['begin_time']]
-                for k in event_table.columns[2:]:
-                    resultss.loc[ll,k]=event_table.loc[ll,k]
+
+            calculate_storage_state(l,event_table,judge_dict2,dict_control2)
+            store_result(l,event_table,judge_dict2,dict_control2,var_SALBUB2,constraint_SARHS2)
         elif etm==2:
             
             update_i_load_and_eff(event_table,load,input_json,sto,l)
             dict_control,z_file,model_SAObj,var_SALBUB,constraint_SARHS,judge_dict = OptimizationDay(parameter_json=input_json, load_json=load, begin_time = event_table.at[l,'i'], time_scale=time_end, storage_begin_json=sto, storage_end_json=sto_end,model_type='MIP',z_file={})
             dict_control2,z_file2,model_SAObj2,var_SALBUB2,constraint_SARHS2,judge_dict2 = OptimizationDay(parameter_json=input_json, load_json=load, begin_time = event_table.at[l,'i'], time_scale=time_end, storage_begin_json=sto, storage_end_json=sto_end,model_type='LP',z_file=z_file)
-            # for k in resultss.keys():
-            #     for ll in range(judge_dict2['begin_time'],time_end):
-            #         resultss[k][ll]=dict_control2[k][ll-judge_dict2['begin_time']]
-            for ll in range(l+1,len(event_table)):
-                event_table.loc[ll,'soc_b_l']=event_table.loc[ll-1,'soc_b_l']-dict_control2['p_b'][event_table.at[ll-1,'i']-judge_dict2['begin_time']]*(event_table.at[ll,'i']-event_table.at[ll-1,'i']+event_table.at[ll,'time']-event_table.at[ll-1,'time'])*judge_dict2['k_b'][event_table.at[ll-1,'i']-judge_dict2['begin_time']] if dict_control2['p_b'][event_table.at[ll-1,'i']-judge_dict2['begin_time']]<=0 else event_table.loc[ll-1,'soc_b_l']-dict_control2['p_b'][event_table.at[ll-1,'i']-judge_dict2['begin_time']]*(event_table.at[ll,'i']-event_table.at[ll-1,'i']+event_table.at[ll,'time']-event_table.at[ll-1,'time'])/judge_dict2['k_b'][event_table.at[ll-1,'i']-judge_dict2['begin_time']]
-                # event_table.loc[ll,'soc_b_l']=dict_control2['soc_b_l'][event_table.at[ll,'i']-l]
-                event_table.loc[ll,'t_ht_l']=event_table.loc[ll-1,'t_ht_l']-dict_control2['g_ht'][event_table.at[ll-1,'i']-judge_dict2['begin_time']]*(event_table.at[ll,'i']-event_table.at[ll-1,'i']+event_table.at[ll,'time']-event_table.at[ll-1,'time'])/(4200/3.6/1000)/input_json['device']['ht']['water_max']- input_json['device']['ht']['miu_loss']*(judge_dict2['t_ht_l'][event_table.at[ll-1,'i']-judge_dict2['begin_time']]-load['ambient_temperature'][event_table.at[ll-1,'i']])*(event_table.at[ll,'i']-event_table.at[ll-1,'i']+event_table.at[ll,'time']-event_table.at[ll-1,'time'])/(4200/3.6/1000)
-                event_table.loc[ll,'t_de_l']=event_table.loc[ll-1,'t_de_l']+(dict_control2['g_ht'][event_table.at[ll-1,'i']-judge_dict2['begin_time']]+dict_control2['g_eb'][event_table.at[ll-1,'i']-judge_dict2['begin_time']]+dict_control2['g_hp'][event_table.at[ll-1,'i']-judge_dict2['begin_time']]+dict_control2['g_fc'][event_table.at[ll-1,'i']-judge_dict2['begin_time']]-dict_control2['g_load'][event_table.at[ll-1,'i']-judge_dict2['begin_time']])*(event_table.at[ll,'i']-event_table.at[ll-1,'i']+event_table.at[ll,'time']-event_table.at[ll-1,'time'])/(4200/3.6/1000)/input_json['device']['de']['water_max']-input_json['device']['de']['miu_loss']*(dict_control2['t_de_l'][event_table.at[ll-1,'i']-judge_dict2['begin_time']]-43)*(event_table.at[ll,'i']-event_table.at[ll-1,'i']+event_table.at[ll,'time']-event_table.at[ll-1,'time'])/(4200/3.6/1000)
-                event_table.loc[ll,'ghp_has_open']=event_table.loc[ll-1,'ghp_has_open']+z_file2['z_hp'][event_table.at[ll-1,'i']-judge_dict2['begin_time']]*(event_table.at[ll,'i']-event_table.at[ll-1,'i']+event_table.at[ll,'time']-event_table.at[ll-1,'time'])
-            for ll in range(l,len(event_table)):
-                for k in dict_control2.keys():
-                    resultss.loc[ll,k]=dict_control2[k][event_table.at[ll,'i']-judge_dict2['begin_time']]
-                for k in var_SALBUB2.keys():
-                    resultss.loc[ll,k]=var_SALBUB2[k][event_table.at[ll,'i']-judge_dict2['begin_time']]
-                for k in constraint_SARHS2.keys():
-                    resultss.loc[ll,k]=constraint_SARHS2[k][event_table.at[ll,'i']-judge_dict2['begin_time']]
-                for k in event_table.columns[2:]:
-                    resultss.loc[ll,k]=event_table.loc[ll,k]
+
+            calculate_storage_state(l,event_table,judge_dict2,dict_control2)
+            store_result(l,event_table,judge_dict2,dict_control2,var_SALBUB2,constraint_SARHS2)
+            
         resultss.loc[l,'etm']=etm
         etm=0
+    #结果保存
+    resultss.to_csv('Output/cacET/tmp.csv',float_format='%.3f')
 
-    resultss.to_csv('Output/cacET/renewnew.csv',float_format='%.3f')
-
-
-
-    # for index in event_table.index:
-    #     et=0
-    #     for c in event_table.columns:
-    #         if dict_control[c][event_table.at[index,'i']]!=event_table.at[index,c]:
-    #             et=1
-    #             break
-    #     if et==1:
-    #         for c in event_table.columns:
-    #             if dict_control[c][event_table.at[index,'i']]!=event_table.at[index,c]:
-    #                 et=1
-    #                 break
-    
-    
-    
-    
-    
-    
-    # except BaseException as E:
-    #     _logging.error('优化主函数执行失败，错误原因为{}'.format(E))
-    #     raise Exception
-    #print(dict_control)
-    #print(dict_plot)
-    
     # 写入输出Excel
-    try:
-        to_csv(dict_control,"cacET/ht300_hydrogen1792_de150_eb82_ghp95_test30_nozppi0mipbb")
-        to_csv(dict_control2,"cacET/ht300_hydrogen1792_de150_eb82_ghp95_test30_nozppi0bb")
-        to_csv(var_SALBUB2,"cacET/ht300_hydrogen1792_de150_eb82_ghp95_test_var_SALBUB330_nozppi0bb")
-        # to_csv(model_SAObj2,"1216_fc不能蓄热/1800_1200/ht300_hydrogen1792_de150_eb82_ghp95_test_")
-        to_csv(constraint_SARHS2,"cacET/ht300_hydrogen1792_de150_eb82_ghp95_test_constraint_SARHS330_nozppi0bb")
+    # try:
+    #     to_csv(dict_control,"cacET/ht300_hydrogen1792_de150_eb82_ghp95_test30_nozppi0mipbb")
+    #     to_csv(dict_control2,"cacET/ht300_hydrogen1792_de150_eb82_ghp95_test30_nozppi0bb")
+    #     to_csv(var_SALBUB2,"cacET/ht300_hydrogen1792_de150_eb82_ghp95_test_var_SALBUB330_nozppi0bb")
+    #     to_csv(constraint_SARHS2,"cacET/ht300_hydrogen1792_de150_eb82_ghp95_test_constraint_SARHS330_nozppi0bb")
 
-        # to_csv(dict_plot,"dict_opt_plot_24h")
-    except BaseException as E:
-        _logging.error('excel输出失败,错误原因为{}'.format(E))
-        raise Exception
+    # except BaseException as E:
+    #     _logging.error('excel输出失败,错误原因为{}'.format(E))
+    #     raise Exception
